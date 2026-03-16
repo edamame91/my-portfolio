@@ -46,7 +46,6 @@ export default function App() {
       <main id="main-content" className="site-main">
         <Hero profile={profile} />
 
-        <AboutSection profile={profile} />
 
         <ProjectsSection projects={projects} />
         <SkillsSection groups={skillGroups} />

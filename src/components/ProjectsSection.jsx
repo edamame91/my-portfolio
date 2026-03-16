@@ -85,7 +85,7 @@ export default function ProjectsSection({ projects }) {
     <Section
       id="projects"
       title="Projects"
-      subtitle="Production-minded builds across web, desktop, and game development."
+      subtitle="Take a look at some of my work"
     >
       <div className="grid grid--projects">
         {projects.map((project) => (

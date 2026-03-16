@@ -7,7 +7,7 @@ export const projects = [
     impact:
       "Demonstrated end-to-end product delivery from React UI to API and relational data layer.",
     tech: ["React", "Node.js", "SQLite", "REST APIs"],
-    repoUrl: "https://github.com/edamame91",
+    repoUrl: "https://github.com/edamame91/Sustainwear",
     liveUrl: null,
     media: [
       {
@@ -26,7 +26,7 @@ export const projects = [
     impact:
       "Strengthened object-oriented design, data modelling, and desktop app architecture skills.",
     tech: ["C#", ".NET", "OOP"],
-    repoUrl: "https://github.com/edamame91",
+    repoUrl: "https://github.com/edamame91/FinTrack",
     liveUrl: null,
     media: [
       {
@@ -41,7 +41,7 @@ export const projects = [
     id: "sheffield-city-council-app",
     title: "Sheffield City Council Mobile App",
     blurb:
-      "Collaborative university project delivering city services and local information in a mobile experience.",
+      "A mobile application for city services and local information.",
     impact:
       "Worked in a team environment using Agile practices, iterative releases, and stakeholder feedback.",
     tech: ["Flutter", "Dart", "Agile", "Mobile Development"],
@@ -60,7 +60,7 @@ export const projects = [
     id: "2-5d-unity-game",
     title: "2.5D Unity Game",
     blurb:
-      "A gameplay prototype built in Unity with C#, focused on mechanics and player feel.",
+      "A gameplay prototype built in Unity with C#.",
     impact:
       "Applied systems thinking to gameplay loops, state handling, and responsive interactions.",
     tech: ["Unity", "C#", "Game Development"],

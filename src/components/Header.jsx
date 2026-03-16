@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+
 const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
@@ -16,6 +18,38 @@ const themeOptions = [
 ];
 
 export default function Header({ name, selectedTheme, onThemeChange }) {
+  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
+  const themeMenuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        themeMenuRef.current &&
+        !themeMenuRef.current.contains(event.target)
+      ) {
+        setIsThemeMenuOpen(false);
+      }
+    }
+
+    function handleEscape(event) {
+      if (event.key === "Escape") {
+        setIsThemeMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  const selectedThemeLabel =
+    themeOptions.find((theme) => theme.value === selectedTheme)?.label ??
+    "Select theme";
+
   return (
     <header className="site-header">
       <a href="#top" className="brand" aria-label="Back to top">
@@ -33,21 +67,51 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
           </ul>
         </nav>
 
-        <label className="theme-select-wrap">
-          <span className="theme-select-label"></span>
-          <select
-            className="theme-select"
-            aria-label="Select color theme"
-            value={selectedTheme}
-            onChange={(event) => onThemeChange(event.target.value)}
+        <div className="theme-select-wrap" ref={themeMenuRef}>
+
+          <button
+            type="button"
+            className="theme-select theme-menu-trigger"
+            aria-haspopup="listbox"
+            aria-labelledby="theme-menu-label"
+            aria-expanded={isThemeMenuOpen}
+            onClick={() => setIsThemeMenuOpen((prev) => !prev)}
           >
-            {themeOptions.map((theme) => (
-              <option key={theme.value} value={theme.value}>
-                {theme.label}
-              </option>
-            ))}
-          </select>
-        </label>
+            <span>{selectedThemeLabel}</span>
+            <span aria-hidden="true">▾</span>
+          </button>
+
+          {isThemeMenuOpen ? (
+            <li
+              className="theme-menu"
+              role="listbox"
+              aria-labelledby="theme-menu-label"
+            >
+              {themeOptions.map((theme) => {
+                const isSelected = theme.value === selectedTheme;
+
+                return (
+                  <li
+                    key={theme.value}
+                    role="option"
+                    aria-selected={isSelected}
+                  >
+                    <button
+                      type="button"
+                      className={`theme-option${isSelected ? " is-active" : ""}`}
+                      onClick={() => {
+                        onThemeChange(theme.value);
+                        setIsThemeMenuOpen(false);
+                      }}
+                    >
+                      {theme.label}
+                    </button>
+                  </li>
+                );
+              })}
+            </li>
+          ) : null}
+        </div>
       </div>
     </header>
   );
