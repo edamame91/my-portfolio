@@ -4,14 +4,12 @@ import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import AboutSection from "./components/AboutSection";
 import ProjectsSection from "./components/ProjectsSection";
-import Section from "./components/Section";
 import SkillsSection from "./components/SkillsSection";
-import TimelineSection from "./components/TimelineSection";
 import { profile } from "./data/profile";
 import { projects } from "./data/projects";
 import { skillGroups } from "./data/skills";
-import { timeline } from "./data/timeline";
 
 const THEME_KEY = "portfolio-theme";
 const THEME_OPTIONS = [
@@ -48,25 +46,7 @@ export default function App() {
       <main id="main-content" className="site-main">
         <Hero profile={profile} />
 
-        <Section
-          id="about"
-          title="About"
-          subtitle="Engineering-focused, collaborative, and driven by practical outcomes."
-        >
-          <article className="card about-card">
-            <p>
-              I’m a first-class Software Engineering student with a strong
-              interest in C#, systems programming, and full-stack development. I
-              enjoy building robust software with clear architecture and
-              maintainable code.
-            </p>
-            <p>
-              My university and project work cover the full delivery lifecycle,
-              from requirements to implementation, testing, and iteration in
-              Agile teams.
-            </p>
-          </article>
-        </Section>
+        <AboutSection profile={profile} />
 
         <ProjectsSection projects={projects} />
         <SkillsSection groups={skillGroups} />

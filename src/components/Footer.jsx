@@ -1,6 +1,4 @@
-
-
-export default function Footer({ name, selectedTheme, onThemeChange }) {
+export default function Footer({ name }) {
   return (
     <footer className="site-footer">
       <div className="footer-main">
@@ -11,7 +9,6 @@ export default function Footer({ name, selectedTheme, onThemeChange }) {
           Back to top ↑
         </a>
       </div>
-     
     </footer>
   );
 }

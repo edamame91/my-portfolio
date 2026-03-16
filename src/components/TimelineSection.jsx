@@ -10,7 +10,7 @@ function TimelineBlock({ title, entries }) {
             key={`${entry.title}-${entry.period}`}
             className="card timeline-item"
           >
-            <div className="timeline-item__head">
+            <div className="timeline-item-head">
               <h4>{entry.title}</h4>
               <p>{entry.period}</p>
             </div>
@@ -21,7 +21,7 @@ function TimelineBlock({ title, entries }) {
             </ul>
             {entry.highlights?.length ? (
               <>
-                <p className="timeline-item__label">Highlights</p>
+                <p className="timeline-item-label">Highlights</p>
                 <ul>
                   {entry.highlights.map((highlight) => (
                     <li key={highlight}>{highlight}</li>

@@ -1,16 +1,33 @@
-export default function Hero({ profile }) {
+import Section from "./Section";
+
+const about = {
+  subtitle: "Software Engineering Student",
+};
+
+export default function AboutSection({ profile }) {
   const frameworkLogos = profile.frameworkLogos ?? [];
 
   return (
-    <section id="top" className="hero-panel" aria-labelledby="hero-heading">
+    <Section
+      id="about"
+      title={<span className="text-gradient h1">{profile.name}</span>}
+      subtitle={about.subtitle}
+    >
       <div className="about-content">
         <article className="card about-card">
-          <h1 id="hero-heading" className="text-gradient mb-10">
-            About
-          </h1>
-          <p className="hero-panel-headline">{profile.headline}</p>
-          <p className="hero-panel-seeking">{profile.seeking}</p>
+          <p>
+            I’m a first-class Software Engineering student with a strong
+            interest in C#, systems programming, and full-stack development. I
+            enjoy building robust software with clear architecture and
+            maintainable code.
+          </p>
+          <p>
+            My university and project work cover the full delivery lifecycle,
+            from requirements to implementation, testing, and iteration in Agile
+            teams.
+          </p>
         </article>
+
         <article
           className="card about-frameworks-card"
           aria-label="Core stack logos"
@@ -33,6 +50,6 @@ export default function Hero({ profile }) {
           </ul>
         </article>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -38,11 +38,11 @@ function ProjectCard({ project }) {
       {preview ? (
         <ProjectMedia item={preview} projectTitle={project.title} />
       ) : null}
-      <div className="project-card__top">
+      <div className="project-card-top">
         <h3>{project.title}</h3>
       </div>
       <p>{project.blurb}</p>
-      <p className="project-card__impact">{project.impact}</p>
+      <p className="project-card-impact">{project.impact}</p>
 
       {rest.length ? (
         <details className="project-media-more">
@@ -64,7 +64,7 @@ function ProjectCard({ project }) {
           <li key={item}>{item}</li>
         ))}
       </ul>
-      <div className="project-card__actions">
+      <div className="project-card-actions">
         {project.repoUrl ? (
           <a href={project.repoUrl} target="_blank" rel="noreferrer">
             Repository
