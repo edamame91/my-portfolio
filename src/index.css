@@ -328,7 +328,7 @@ h2 {
 h1 {
   font-size: clamp(1rem, 5vw, 2.5rem);
   letter-spacing: -0.02em;
-  margin: 10px 0 5px 0;
+  margin: 0 0 1rem;
   @media (max-width: 1024px) {
     margin: 0 0 0.5rem;
   
@@ -351,7 +351,7 @@ h4 {
   font-size: clamp(1rem, 2vw, 1rem);
 }
 p {
-  margin: 0;
+  margin: 0 0 1.25rem;
 }
 
 a {

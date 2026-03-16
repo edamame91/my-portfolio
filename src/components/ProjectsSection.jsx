@@ -1,6 +1,8 @@
 import Section from "./Section";
 
 function ProjectMedia({ item, projectTitle }) {
+  const isPlaceholder = /placeholder|hero\.png/i.test(item.src || "");
+
   if (item.kind === "video") {
     return (
       <video
@@ -18,7 +20,7 @@ function ProjectMedia({ item, projectTitle }) {
 
   return (
     <img
-      className="project-media"
+      className={`project-media${isPlaceholder ? " project-media--placeholder" : ""}`}
       src={item.src}
       alt={item.alt || `${projectTitle} preview image`}
       loading="lazy"

@@ -57,7 +57,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
       </a>
 
       <div className="header-controls">
-        <nav aria-label="Primary navigation">
+        <nav className="primary-nav" aria-label="Primary navigation">
           <ul>
             {navItems.map((item) => (
               <li key={item.href}>
@@ -68,7 +68,6 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
         </nav>
 
         <div className="theme-select-wrap" ref={themeMenuRef}>
-
           <button
             type="button"
             className="theme-select theme-menu-trigger"
@@ -82,7 +81,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
           </button>
 
           {isThemeMenuOpen ? (
-            <li
+            <ul
               className="theme-menu"
               role="listbox"
               aria-labelledby="theme-menu-label"
@@ -109,7 +108,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
                   </li>
                 );
               })}
-            </li>
+            </ul>
           ) : null}
         </div>
       </div>
