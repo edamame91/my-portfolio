@@ -1,3 +1,4 @@
+/* #region Accessibility and anchor scrolling */
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -32,7 +33,9 @@ html {
 section[id] {
   scroll-margin-top: var(--anchor-offset);
 }
+/* #endregion Accessibility and anchor scrolling */
 
+/* #region Header and navigation */
 .site-header {
   position: sticky;
   top: 0;
@@ -53,7 +56,7 @@ section[id] {
 }
 
 .brand {
-  font-size: clamp(1.25rem, 3vw, 2.5rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   letter-spacing: 0.04em;
   font-weight: 600;
 }
@@ -94,11 +97,6 @@ section[id] {
   position: relative;
 }
 
-.theme-select-label {
-  font-size: 0.82rem;
-  color: var(--text);
-}
-
 .theme-select {
   border: 1px solid var(--accent-border);
   background: var(--bg);
@@ -127,12 +125,6 @@ section[id] {
 .theme-select:focus {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-}
-
-.theme-select option {
-  background: var(--bg);
-  color: var(--text-h);
-  border-radius: 5px;
 }
 
 .theme-menu {
@@ -177,7 +169,9 @@ section[id] {
   color: var(--accent);
   font-weight: 600;
 }
+/* #endregion Header and navigation */
 
+/* #region Main layout and shared surfaces */
 .site-main {
   padding: clamp(1rem, 3vw, 2rem);
   display: grid;
@@ -199,23 +193,7 @@ section[id] {
     var(--bg);
 }
 
-.eyebrow {
-  display: inline-block;
-  margin-bottom: 0.9rem;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-}
-
-.hero-panel-role {
-  font-size: 0.9rem;
-  margin-bottom: 0.7rem;
-  color: var(--text-h);
-}
-
 .hero-panel-headline,
-.hero-panel-summary,
 .hero-panel-seeking {
   max-width: 70ch;
   margin-bottom: 0.5rem;
@@ -223,13 +201,6 @@ section[id] {
 
 .hero-panel-headline {
   margin: 0 0 1.25rem;
-}
-
-.hero-panel-actions {
-  margin-top: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
 }
 
 .btn {
@@ -249,12 +220,6 @@ section[id] {
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
-}
-
-.btn--primary {
-  background: var(--accent);
-  color: var(--accent-contrast);
-  text-shadow: var(--accent-contrast-shadow);
 }
 
 .btn--ghost {
@@ -322,7 +287,9 @@ section[id] {
   aspect-ratio: 1 / 1;
   object-fit: contain;
 }
+/* #endregion Main layout and shared surfaces */
 
+/* #region Content grids and project cards */
 .grid {
   display: grid;
   gap: 0.85rem;
@@ -409,9 +376,10 @@ section[id] {
   transform: translateY(-1px);
   box-shadow: var(--shadow);
 }
+/* #endregion Content grids and project cards */
 
-.project-card-actions,
-.contact-links {
+/* #region Contact, footer, and typography helpers */
+.project-card-actions {
   margin-top: 0.8rem;
   display: flex;
   flex-wrap: wrap;
@@ -419,7 +387,6 @@ section[id] {
 }
 
 .project-card-actions a,
-.contact-links a,
 .site-footer a,
 .brand {
   color: var(--accent);
@@ -510,7 +477,9 @@ section[id] {
   padding-bottom: 0.08em;
   overflow: visible;
 }
+/* #endregion Contact, footer, and typography helpers */
 
+/* #region Focus and responsive breakpoints */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--accent);
@@ -661,7 +630,9 @@ button:focus-visible {
     color: var(--accent);
   }
 }
+/* #endregion Focus and responsive breakpoints */
 
+/* #region Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -672,3 +643,4 @@ button:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+/* #endregion Reduced motion */

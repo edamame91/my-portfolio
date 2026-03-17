@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* #region Root theme tokens and global variables */
 :root {
   /* #region Theme palette tokens */
   --carmine-50: #fce9eb;
@@ -169,6 +170,7 @@
     font-size: 16px;
   }
 }
+/* #endregion Root theme tokens and global variables */
 
 /* #region Theme mappings */
 
@@ -272,6 +274,7 @@
 
 /* #endregion Theme mappings */
 
+/* #region Dark mode overrides */
 @media (prefers-color-scheme: dark) {
   :root {
     --text: var(--theme-color-200);
@@ -292,12 +295,10 @@
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
   }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
 }
+/* #endregion Dark mode overrides */
 
+/* #region Base document and app shell */
 body {
   margin: 0;
   background: var(--bg);
@@ -307,17 +308,24 @@ body {
   width: min(1400px, 100%);
   max-width: 100%;
   margin: 0 auto;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
 }
 
+@media (min-width: 1400px) {
+  #root {
+    border-inline: 1px solid var(--border);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
+/* #endregion Base document and app shell */
 
+/* #region Typography and inline elements */
 h1,
 h2 {
   font-family: var(--heading);
@@ -331,7 +339,6 @@ h1 {
   margin: 0 0 1rem;
   @media (max-width: 1024px) {
     margin: 0 0 0.5rem;
-  
   }
 }
 h2 {
@@ -351,7 +358,6 @@ h4 {
   font-size: clamp(1rem, 2vw, 1rem);
 }
 
-
 a {
   color: var(--accent);
   text-decoration: none;
@@ -370,3 +376,4 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+/* #endregion Typography and inline elements */
