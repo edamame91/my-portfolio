@@ -21,6 +21,13 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
   const themeMenuRef = useRef(null);
 
+  const renderNavLinks = () =>
+    navItems.map((item) => (
+      <li key={item.href}>
+        <a href={item.href}>{item.label}</a>
+      </li>
+    ));
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -51,67 +58,70 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
     "Select theme";
 
   return (
-    <header className="site-header">
-      <a href="#top" className="brand" aria-label="Back to top">
-        {name}
-      </a>
+    <>
+      <header className="site-header">
+        <a href="#top" className="brand text-gradient" aria-label="Back to top">
+          {name}
+        </a>
 
-      <div className="header-controls">
-        <nav className="primary-nav" aria-label="Primary navigation">
-          <ul>
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="theme-select-wrap" ref={themeMenuRef}>
-          <button
-            type="button"
-            className="theme-select theme-menu-trigger"
-            aria-haspopup="listbox"
-            aria-labelledby="theme-menu-label"
-            aria-expanded={isThemeMenuOpen}
-            onClick={() => setIsThemeMenuOpen((prev) => !prev)}
+        <div className="header-controls">
+          <nav
+            className="primary-nav primary-nav--desktop"
+            aria-label="Primary navigation"
           >
-            <span>{selectedThemeLabel}</span>
-            <span aria-hidden="true">▾</span>
-          </button>
+            <ul>{renderNavLinks()}</ul>
+          </nav>
 
-          {isThemeMenuOpen ? (
-            <ul
-              className="theme-menu"
-              role="listbox"
+          <div className="theme-select-wrap" ref={themeMenuRef}>
+            <button
+              type="button"
+              className="theme-select theme-menu-trigger"
+              aria-haspopup="listbox"
               aria-labelledby="theme-menu-label"
+              aria-expanded={isThemeMenuOpen}
+              onClick={() => setIsThemeMenuOpen((prev) => !prev)}
             >
-              {themeOptions.map((theme) => {
-                const isSelected = theme.value === selectedTheme;
+              <span>{selectedThemeLabel}</span>
+              <span aria-hidden="true">▾</span>
+            </button>
 
-                return (
-                  <li
-                    key={theme.value}
-                    role="option"
-                    aria-selected={isSelected}
-                  >
-                    <button
-                      type="button"
-                      className={`theme-option${isSelected ? " is-active" : ""}`}
-                      onClick={() => {
-                        onThemeChange(theme.value);
-                        setIsThemeMenuOpen(false);
-                      }}
+            {isThemeMenuOpen ? (
+              <ul
+                className="theme-menu"
+                role="listbox"
+                aria-labelledby="theme-menu-label"
+              >
+                {themeOptions.map((theme) => {
+                  const isSelected = theme.value === selectedTheme;
+
+                  return (
+                    <li
+                      key={theme.value}
+                      role="option"
+                      aria-selected={isSelected}
                     >
-                      {theme.label}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : null}
+                      <button
+                        type="button"
+                        className={`theme-option${isSelected ? " is-active" : ""}`}
+                        onClick={() => {
+                          onThemeChange(theme.value);
+                          setIsThemeMenuOpen(false);
+                        }}
+                      >
+                        {theme.label}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : null}
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      <nav className="mobile-nav" aria-label="Mobile navigation">
+        <ul>{renderNavLinks()}</ul>
+      </nav>
+    </>
   );
 }

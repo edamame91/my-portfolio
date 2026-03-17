@@ -5,9 +5,9 @@ export default function AboutSection({ profile }) {
     <section id="about" className="hero-panel" aria-labelledby="hero-heading">
       <div className="about-content">
         <article className="card about-card">
-          <h1 id="hero-heading" className="text-gradient mb-15">
+          <h2 id="hero-heading" className="section-header">
             About
-          </h1>
+          </h2>
           <p className="hero-panel-headline mt-5">{profile.headline}</p>
           <p className="hero-panel-seeking">{profile.seeking}</p>
         </article>
