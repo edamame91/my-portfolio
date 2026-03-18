@@ -8,7 +8,9 @@ export default function AboutSection({ profile }) {
           <h2 id="hero-heading" className="section-header">
             About
           </h2>
-          <p className="hero-panel-headline mt-5">{profile.headline}</p>
+          <p className="hero-panel-headline about-headline">
+            {profile.headline}
+          </p>
           <p className="hero-panel-seeking">{profile.seeking}</p>
         </article>
         <article

@@ -62,7 +62,7 @@ function ProjectCard({ project, priority = false }) {
           />
         ) : null}
         <div className="project-card-top">
-          <h3 className="py-3">{project.title}</h3>
+          <h3 className="project-card-title">{project.title}</h3>
         </div>
         <p>{project.blurb}</p>
         <ul className="pill-list" aria-label={`${project.title} technologies`}>

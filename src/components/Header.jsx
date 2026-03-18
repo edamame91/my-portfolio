@@ -1,21 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { THEME_MENU_OPTIONS } from "../data/themes";
 
 const navItems = [
-  { label: "About", to: "/?section=about", isPrimaryRoute: false },
-  { label: "Projects", to: "/?section=projects", isPrimaryRoute: false },
-  { label: "Skills", to: "/?section=skills", isPrimaryRoute: false },
-  { label: "Contact", to: "/?section=contact", isPrimaryRoute: false },
-];
-
-const themeOptions = [
-  { label: "Peppermint", value: "peppermint" },
-  { label: "Raspberry", value: "raspberry" },
-  { label: "Pistachio", value: "pistachio" },
-  { label: "Cantelope", value: "cantelope" },
-  { label: "Grape", value: "grape" },
-  { label: "Blueberry", value: "blueberry" },
-  { label: "Foam Banana", value: "foam-banana" },
+  { label: "About", to: "/?section=about" },
+  { label: "Projects", to: "/?section=projects" },
+  { label: "Skills", to: "/?section=skills" },
+  { label: "Contact", to: "/?section=contact" },
 ];
 
 export default function Header({ name, selectedTheme, onThemeChange }) {
@@ -25,11 +16,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
   const renderNavLinks = () =>
     navItems.map((item) => (
       <li key={item.to}>
-        {item.isPrimaryRoute ? (
-          <NavLink to={item.to}>{item.label}</NavLink>
-        ) : (
-          <Link to={item.to}>{item.label}</Link>
-        )}
+        <Link to={item.to}>{item.label}</Link>
       </li>
     ));
 
@@ -59,7 +46,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
   }, []);
 
   const selectedThemeLabel =
-    themeOptions.find((theme) => theme.value === selectedTheme)?.label ??
+    THEME_MENU_OPTIONS.find((theme) => theme.value === selectedTheme)?.label ??
     "Select theme";
 
   return (
@@ -86,7 +73,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
               type="button"
               className="theme-select theme-menu-trigger"
               aria-haspopup="listbox"
-              aria-labelledby="theme-menu-label"
+              aria-label="Select theme"
               aria-expanded={isThemeMenuOpen}
               onClick={() => setIsThemeMenuOpen((prev) => !prev)}
             >
@@ -98,9 +85,9 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
               <ul
                 className="theme-menu"
                 role="listbox"
-                aria-labelledby="theme-menu-label"
+                aria-label="Theme options"
               >
-                {themeOptions.map((theme) => {
+                {THEME_MENU_OPTIONS.map((theme) => {
                   const isSelected = theme.value === selectedTheme;
 
                   return (

@@ -11,17 +11,9 @@ import SkillsSection from "./components/SkillsSection";
 import { profile } from "./data/profile";
 import { projects } from "./data/projects";
 import { skillGroups } from "./data/skills";
+import { THEME_OPTIONS } from "./data/themes";
 
 const THEME_KEY = "portfolio-theme";
-const THEME_OPTIONS = [
-  "peppermint",
-  "raspberry",
-  "pistachio",
-  "cantelope",
-  "grape",
-  "blueberry",
-  "foam-banana",
-];
 
 function HomePage() {
   const location = useLocation();

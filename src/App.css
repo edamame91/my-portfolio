@@ -63,6 +63,7 @@ section[id] {
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   letter-spacing: 0.04em;
   font-weight: 600;
+  color: var(--accent);
 }
 
 .site-header ul {
@@ -214,6 +215,10 @@ section[id] {
   margin: 0 0 1.25rem;
 }
 
+.about-headline {
+  margin-top: 1.25rem;
+}
+
 .btn {
   display: inline-flex;
   text-decoration: none;
@@ -292,6 +297,11 @@ section[id] {
   background: color-mix(in srgb, var(--bg) 95%, var(--accent-bg));
 }
 
+.framework-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
 .framework-logo {
   width: clamp(2rem, 4vw, 2.6rem);
   height: clamp(2rem, 4vw, 2.6rem);
@@ -307,8 +317,7 @@ section[id] {
 }
 
 .grid--projects,
-.grid--skills,
-.grid--timeline {
+.grid--skills {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
@@ -321,6 +330,11 @@ section[id] {
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
+}
+
+.project-card-title {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .project-media {
@@ -354,31 +368,6 @@ section[id] {
   max-width: 100%;
   aspect-ratio: auto;
   max-height: min(60vh, 420px);
-}
-
-.project-media-more {
-  margin-top: 0.75rem;
-}
-
-.project-media-more summary {
-  cursor: pointer;
-  color: var(--text-h);
-  font-size: 0.9rem;
-}
-
-.project-media-grid {
-  margin-top: 0.6rem;
-  display: grid;
-  gap: 0.6rem;
-}
-
-.badge {
-  font-size: 0.75rem;
-  padding: 0.2rem 0.45rem;
-  border-radius: 999px;
-  color: var(--text-h);
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
 }
 
 .project-card-impact {
@@ -453,33 +442,13 @@ section[id] {
 }
 
 .project-card-actions a,
-.site-footer a,
-.brand {
+.site-footer a {
   color: var(--accent);
 }
 
-.timeline-item-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.8rem;
-  align-items: baseline;
-}
-
-.timeline-item h4,
 .project-card h3,
-.skill-card h3,
-.timeline-block h3 {
+.skill-card h3 {
   margin: 0;
-  color: var(--text-h);
-}
-
-.timeline-item ul {
-  margin: 0.75rem 0;
-  padding-left: 1rem;
-}
-
-.timeline-item-label {
-  font-weight: 600;
   color: var(--text-h);
 }
 
@@ -858,10 +827,6 @@ button:focus-visible {
   .grid--projects,
   .grid--skills {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .grid--timeline {
-    grid-template-columns: 1fr 1fr;
   }
 }
 

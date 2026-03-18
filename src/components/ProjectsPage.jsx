@@ -54,44 +54,6 @@ function FullProjectEntry({ project, isActive, isFirst }) {
   const [lightboxTouchStartX, setLightboxTouchStartX] = useState(null);
   const [lightboxTouchStartY, setLightboxTouchStartY] = useState(null);
 
-  useEffect(() => {
-    setCurrentIndex(0);
-    setIsLightboxOpen(false);
-    setLightboxIndex(0);
-    setZoomPercent(100);
-  }, [project.id]);
-
-  useEffect(() => {
-    if (!isLightboxOpen) {
-      return;
-    }
-
-    function handleKeyDown(event) {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        closeLightbox();
-      }
-
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        showPreviousInLightbox();
-      }
-
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        showNextInLightbox();
-      }
-    }
-
-    document.body.classList.add("has-modal-open");
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.classList.remove("has-modal-open");
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isLightboxOpen, lightboxIndex, media.length]);
-
   const hasMedia = media.length > 0;
   const hasMultipleMedia = media.length > 1;
   const activeItem = hasMedia ? media[currentIndex] : null;
@@ -239,6 +201,41 @@ function FullProjectEntry({ project, isActive, isFirst }) {
     setLightboxTouchStartX(null);
     setLightboxTouchStartY(null);
   }
+
+  useEffect(() => {
+    if (!isLightboxOpen) {
+      return;
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setCurrentIndex(lightboxIndex);
+        setIsLightboxOpen(false);
+        setZoomPercent(100);
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setLightboxIndex((prev) => (prev - 1 + media.length) % media.length);
+        setZoomPercent(100);
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setLightboxIndex((prev) => (prev + 1) % media.length);
+        setZoomPercent(100);
+      }
+    }
+
+    document.body.classList.add("has-modal-open");
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.classList.remove("has-modal-open");
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isLightboxOpen, lightboxIndex, media.length]);
 
   return (
     <article
@@ -475,25 +472,25 @@ function FullProjectEntry({ project, isActive, isFirst }) {
       ) : null}
 
       <div className="project-card-description">
-      <p>{project.blurb}</p>
-      <p className="project-card-impact">{project.impact}</p>
+        <p>{project.blurb}</p>
+        <p className="project-card-impact">{project.impact}</p>
 
-      {project.details?.length ? (
-        <ul
-          className="project-details-list"
-          aria-label={`${project.title} details`}
-        >
-          {project.details.map((detail) => (
-            <li key={detail}>{detail}</li>
+        {project.details?.length ? (
+          <ul
+            className="project-details-list"
+            aria-label={`${project.title} details`}
+          >
+            {project.details.map((detail) => (
+              <li key={detail}>{detail}</li>
+            ))}
+          </ul>
+        ) : null}
+
+        <ul className="pill-list" aria-label={`${project.title} technologies`}>
+          {project.tech.map((item) => (
+            <li key={item}>{item}</li>
           ))}
         </ul>
-      ) : null}
-
-      <ul className="pill-list" aria-label={`${project.title} technologies`}>
-        {project.tech.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
       </div>
 
       <div className="project-card-actions">
