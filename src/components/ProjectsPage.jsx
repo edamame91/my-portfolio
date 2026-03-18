@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
-function ProjectMedia({ item, projectTitle }) {
+function ProjectMedia({ item, projectTitle, priority = false, sizes }) {
   const isPlaceholder = /placeholder|hero\.png/i.test(item.src || "");
+  const srcSet = item.srcSet
+    ? typeof item.srcSet === "string"
+      ? item.srcSet
+      : Object.entries(item.srcSet)
+          .map(([width, src]) => `${src} ${width}w`)
+          .join(", ")
+    : undefined;
+  const resolvedSizes = sizes || item.sizes || "(max-width: 900px) 100vw, 80vw";
 
   if (item.kind === "video") {
     return (
@@ -23,8 +31,11 @@ function ProjectMedia({ item, projectTitle }) {
     <img
       className={`project-media${isPlaceholder ? " project-media--placeholder" : ""}`}
       src={item.src}
+      srcSet={srcSet}
+      sizes={srcSet ? resolvedSizes : undefined}
       alt={item.alt || `${projectTitle} preview image`}
-      loading="lazy"
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
       decoding="async"
       width="1280"
       height="720"
@@ -32,7 +43,7 @@ function ProjectMedia({ item, projectTitle }) {
   );
 }
 
-function FullProjectEntry({ project, isActive }) {
+function FullProjectEntry({ project, isActive, isFirst }) {
   const media = project.media || [];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState(null);
@@ -254,7 +265,11 @@ function FullProjectEntry({ project, isActive }) {
             onTouchEnd={hasMultipleMedia ? handleTouchEnd : undefined}
           >
             {activeItem.kind === "video" ? (
-              <ProjectMedia item={activeItem} projectTitle={project.title} />
+              <ProjectMedia
+                item={activeItem}
+                projectTitle={project.title}
+                priority={isFirst && currentIndex === 0}
+              />
             ) : (
               <button
                 type="button"
@@ -262,7 +277,11 @@ function FullProjectEntry({ project, isActive }) {
                 onClick={() => openLightboxAt(currentIndex)}
                 aria-label={`Open ${activeItem.alt || `${project.title} media`} fullscreen`}
               >
-                <ProjectMedia item={activeItem} projectTitle={project.title} />
+                <ProjectMedia
+                  item={activeItem}
+                  projectTitle={project.title}
+                  priority={isFirst && currentIndex === 0}
+                />
               </button>
             )}
           </div>
@@ -385,6 +404,20 @@ function FullProjectEntry({ project, isActive }) {
                 <img
                   className="project-lightbox-media"
                   src={lightboxItem.src}
+                  srcSet={
+                    lightboxItem.srcSet
+                      ? typeof lightboxItem.srcSet === "string"
+                        ? lightboxItem.srcSet
+                        : Object.entries(lightboxItem.srcSet)
+                            .map(([width, src]) => `${src} ${width}w`)
+                            .join(", ")
+                      : undefined
+                  }
+                  sizes={
+                    lightboxItem.srcSet
+                      ? lightboxItem.sizes || "(max-width: 1200px) 100vw, 90vw"
+                      : undefined
+                  }
                   alt={
                     lightboxItem.alt || `${project.title} fullscreen preview`
                   }
@@ -507,11 +540,12 @@ export default function ProjectsPage({ projects }) {
         </div>
 
         <div className="grid grid--project-entries">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <FullProjectEntry
               key={project.id}
               project={project}
               isActive={project.id === activeEntry}
+              isFirst={index === 0}
             />
           ))}
         </div>

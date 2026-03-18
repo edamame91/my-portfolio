@@ -15,23 +15,13 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./projects/council/merged.png",
+        src: "./projects/council/merged.webp",
         alt: "City council app home screen",
       },
       {
         kind: "image",
-        src: "./projects/council/bin-cal.png",
-        alt: "City services mobile app preview",
-      },
-      {
-        kind: "image",
-        src: "./projects/council/transport-map.png",
-        alt: "City council app transport map",
-      },
-      {
-        kind: "image",
-        src: "./projects/council/transport-list.png",
-        alt: "City council app transport list",
+        src: "./projects/council/merged-transport.webp",
+        alt: "City council app transport list and map",
       },
     ],
     featured: true,
@@ -53,17 +43,17 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./projects/fintrack/cdr-sum.png",
+        src: "./projects/fintrack/cdr-sum.webp",
         alt: "Finance tracker dashboard preview",
       },
       {
         kind: "image",
-        src: "./projects/fintrack/month-sum.png",
+        src: "./projects/fintrack/month-sum.webp",
         alt: "Finance tracker monthly summary",
       },
       {
         kind: "image",
-        src: "./projects/fintrack/total.png",
+        src: "./projects/fintrack/total.webp",
         alt: "Finance tracker totals screen",
       },
     ],
@@ -86,22 +76,22 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./projects/sustainwear/dashboard.png",
+        src: "./projects/sustainwear/dashboard.webp",
         alt: "Charity donation app interface preview",
       },
       {
         kind: "image",
-        src: "./projects/sustainwear/inv-overview.png",
+        src: "./projects/sustainwear/inv-overview.webp",
         alt: "Charity donation app inventory overview",
       },
       {
         kind: "image",
-        src: "./projects/sustainwear/inv-category.png",
+        src: "./projects/sustainwear/inv-category.webp",
         alt: "Charity donation app category view",
       },
       {
         kind: "image",
-        src: "./projects/sustainwear/inv-search.png",
+        src: "./projects/sustainwear/inv-search.webp",
         alt: "Charity donation app inventory search",
       },
     ],
@@ -123,7 +113,7 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./placeholder.png",
+        src: "./placeholder.webp",
 
         alt: "2.5D Unity game scene preview",
       },

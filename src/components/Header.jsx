@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const navItems = [
   { label: "About", to: "/?section=about", isPrimaryRoute: false },
-  { label: "Projects", to: "/projects", isPrimaryRoute: true },
+  { label: "Projects", to: "/?section=projects", isPrimaryRoute: false },
   { label: "Skills", to: "/?section=skills", isPrimaryRoute: false },
   { label: "Contact", to: "/?section=contact", isPrimaryRoute: false },
 ];

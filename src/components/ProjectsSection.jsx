@@ -1,8 +1,17 @@
 import Section from "./Section";
 import { Link } from "react-router-dom";
 
-function ProjectMedia({ item, projectTitle }) {
+function ProjectMedia({ item, projectTitle, priority = false }) {
   const isPlaceholder = /placeholder|hero\.png/i.test(item.src || "");
+  const srcSet = item.srcSet
+    ? typeof item.srcSet === "string"
+      ? item.srcSet
+      : Object.entries(item.srcSet)
+          .map(([width, src]) => `${src} ${width}w`)
+          .join(", ")
+    : undefined;
+  const sizes =
+    item.sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw";
 
   if (item.kind === "video") {
     return (
@@ -23,8 +32,11 @@ function ProjectMedia({ item, projectTitle }) {
     <img
       className={`project-media${isPlaceholder ? " project-media--placeholder" : ""}`}
       src={item.src}
+      srcSet={srcSet}
+      sizes={srcSet ? sizes : undefined}
       alt={item.alt || `${projectTitle} preview image`}
-      loading="lazy"
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
       decoding="async"
       width="1280"
       height="720"
@@ -32,7 +44,7 @@ function ProjectMedia({ item, projectTitle }) {
   );
 }
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, priority = false }) {
   const [preview] = project.media || [];
 
   return (
@@ -43,7 +55,11 @@ function ProjectCard({ project }) {
     >
       <article className="card project-card">
         {preview ? (
-          <ProjectMedia item={preview} projectTitle={project.title} />
+          <ProjectMedia
+            item={preview}
+            projectTitle={project.title}
+            priority={priority}
+          />
         ) : null}
         <div className="project-card-top">
           <h3 className="py-3">{project.title}</h3>
@@ -68,8 +84,12 @@ export default function ProjectsSection({ projects }) {
       subtitle="Take a look at some of my work"
     >
       <div className="grid grid--projects">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+        {projects.map((project, index) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            priority={index === 0}
+          />
         ))}
       </div>
     </Section>

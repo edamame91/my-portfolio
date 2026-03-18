@@ -559,12 +559,12 @@ section[id] {
   margin-top: 0.5rem;
   margin-bottom: 0.7rem;
   padding-bottom: 0.5rem;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: var(--text-h);
 }
 
