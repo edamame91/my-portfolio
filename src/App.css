@@ -591,14 +591,19 @@ section[id] {
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: 420px; /* same cap */
+  max-height: min(78vh, 760px);
   object-fit: contain;
 }
 
 .project-carousel {
   display: grid;
+  align-items: start;
   gap: 0.7rem;
   margin-bottom: 0.75rem;
+}
+
+.project-carousel > * {
+  min-width: 0;
 }
 
 .project-carousel:focus-visible {
@@ -608,11 +613,30 @@ section[id] {
 }
 
 .project-carousel-frame {
-  height: clamp(220px, 42vw, 420px);
   display: grid;
   place-items: center;
+  position: relative;
   width: 100%;
+  min-width: 0;
   touch-action: pan-y;
+}
+
+.project-carousel-frame .project-media,
+.project-carousel-frame .project-media-trigger {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(78vh, 760px);
+}
+
+.project-carousel-frame .project-media {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(78vh, 760px);
+  margin-inline: auto;
+  object-fit: contain;
 }
 
 .project-media-trigger {
@@ -621,10 +645,15 @@ section[id] {
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   display: grid;
   place-items: center;
   cursor: zoom-in;
+}
+
+.project-carousel-footer {
+  display: grid;
+  gap: 0.45rem;
 }
 
 .project-lightbox {
@@ -700,6 +729,9 @@ section[id] {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
+  flex-wrap: nowrap;
   gap: 0.65rem;
 }
 
@@ -722,6 +754,7 @@ section[id] {
 
 .project-carousel-dots {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 0.4rem;
 }
@@ -739,6 +772,69 @@ section[id] {
 .project-carousel-dot.is-active {
   background: var(--accent);
   border-color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .project-entry {
+    padding: 0.85rem;
+  }
+
+  .project-title {
+    margin-top: 0.35rem;
+    margin-bottom: 0.55rem;
+    font-size: 1.18rem;
+  }
+
+  .project-carousel {
+    gap: 0.55rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-carousel-footer {
+    gap: 0.35rem;
+    padding-top: 0.25rem;
+  }
+
+  .project-carousel-frame {
+    min-height: 0;
+  }
+
+  .project-entry .project-media,
+  .project-carousel-frame .project-media,
+  .project-carousel-frame .project-media-trigger {
+    max-height: min(72vh, 620px);
+  }
+
+  .project-carousel-controls {
+    gap: 0.5rem;
+  }
+
+  .project-carousel-count {
+    min-width: 2.8rem;
+    font-size: 0.85rem;
+  }
+
+  .project-carousel-dots {
+    gap: 0.35rem;
+  }
+
+  .project-card-actions {
+    gap: 0.55rem;
+  }
+
+  .project-card-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.65rem;
+    border: 1px solid var(--accent-border);
+    border-radius: 0.55rem;
+    background: var(--accent-bg);
+  }
+
+  .project-card-description {
+    padding-top: 0.8rem;
+  }
 }
 /* #endregion Contact, footer, and typography helpers */
 
@@ -904,7 +1000,7 @@ button:focus-visible {
   }
 
   .project-carousel-frame {
-    height: clamp(220px, 60vw, 320px);
+    min-height: 0;
   }
 
   .project-lightbox {

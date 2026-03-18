@@ -287,7 +287,7 @@ function FullProjectEntry({ project, isActive, isFirst }) {
           </div>
 
           {hasMultipleMedia ? (
-            <>
+            <div className="project-carousel-footer">
               <div className="project-carousel-controls">
                 <button
                   type="button"
@@ -329,7 +329,7 @@ function FullProjectEntry({ project, isActive, isFirst }) {
                   );
                 })}
               </div>
-            </>
+            </div>
           ) : null}
         </div>
       ) : null}
@@ -474,6 +474,7 @@ function FullProjectEntry({ project, isActive, isFirst }) {
         </div>
       ) : null}
 
+      <div className="project-card-description">
       <p>{project.blurb}</p>
       <p className="project-card-impact">{project.impact}</p>
 
@@ -493,6 +494,7 @@ function FullProjectEntry({ project, isActive, isFirst }) {
           <li key={item}>{item}</li>
         ))}
       </ul>
+      </div>
 
       <div className="project-card-actions">
         {project.repoUrl ? (
