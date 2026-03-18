@@ -1,4 +1,5 @@
 import Section from "./Section";
+import { Link } from "react-router-dom";
 
 function ProjectMedia({ item, projectTitle }) {
   const isPlaceholder = /placeholder|hero\.png/i.test(item.src || "");
@@ -32,53 +33,30 @@ function ProjectMedia({ item, projectTitle }) {
 }
 
 function ProjectCard({ project }) {
-  const media = project.media || [];
-  const [preview, ...rest] = media;
+  const [preview] = project.media || [];
 
   return (
-    <article className="card project-card">
-      {preview ? (
-        <ProjectMedia item={preview} projectTitle={project.title} />
-      ) : null}
-      <div className="project-card-top">
-        <h3>{project.title}</h3>
-      </div>
-      <p>{project.blurb}</p>
-      <p className="project-card-impact">{project.impact}</p>
-
-      {rest.length ? (
-        <details className="project-media-more">
-          <summary>More demos ({rest.length})</summary>
-          <div className="project-media-grid">
-            {rest.map((item, index) => (
-              <ProjectMedia
-                key={`${project.id}-${item.src}-${index}`}
-                item={item}
-                projectTitle={project.title}
-              />
-            ))}
-          </div>
-        </details>
-      ) : null}
-
-      <ul className="pill-list" aria-label={`${project.title} technologies`}>
-        {project.tech.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-      <div className="project-card-actions">
-        {project.repoUrl ? (
-          <a href={project.repoUrl} target="_blank" rel="noreferrer">
-            Repository
-          </a>
+    <Link
+      className="project-card-link"
+      to={`/projects?entry=${encodeURIComponent(project.id)}`}
+      aria-label={`Open full project entry for ${project.title}`}
+    >
+      <article className="card project-card">
+        {preview ? (
+          <ProjectMedia item={preview} projectTitle={project.title} />
         ) : null}
-        {project.liveUrl ? (
-          <a href={project.liveUrl} target="_blank" rel="noreferrer">
-            Live demo
-          </a>
-        ) : null}
-      </div>
-    </article>
+        <div className="project-card-top">
+          <h3 className="py-3">{project.title}</h3>
+        </div>
+        <p>{project.blurb}</p>
+        <ul className="pill-list" aria-label={`${project.title} technologies`}>
+          {project.tech.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <p className="project-card-cta">View full project →</p>
+      </article>
+    </Link>
   );
 }
 

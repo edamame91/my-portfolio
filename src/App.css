@@ -78,6 +78,12 @@ section[id] {
   color: var(--accent);
 }
 
+.site-header a.active {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.24rem;
+}
+
 .header-controls a {
   font-size: 0.95rem;
   padding: 0.4rem 0.8rem;
@@ -114,6 +120,7 @@ section[id] {
   gap: 0.65rem;
   cursor: pointer;
   min-width: 8.1rem;
+  color: var(--accent);
 }
 
 .theme-menu-trigger span:first-child {
@@ -301,8 +308,11 @@ section[id] {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.grid--projects {
+  align-items: stretch;
+}
+
 .project-card-top {
-  margin-top: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -310,20 +320,36 @@ section[id] {
 }
 
 .project-media {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 60vh;
+  aspect-ratio: auto;
+  object-fit: contain;
   object-position: center;
   border-radius: 0.7rem;
-  border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--bg) 70%, var(--code-bg));
 }
 
 .project-media--placeholder {
   object-fit: contain;
   padding: 0.5rem;
-  background: color-mix(in srgb, var(--bg) 85%, var(--accent-bg));
+}
+
+.grid--projects .project-media {
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: auto;
+  max-height: min(60vh, 420px);
+  justify-self: center;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
+.grid--projects .project-media--placeholder {
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: auto;
+  max-height: min(60vh, 420px);
 }
 
 .project-media-more {
@@ -353,6 +379,42 @@ section[id] {
 
 .project-card-impact {
   margin-top: 0.5rem;
+}
+
+.project-card-link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  height: 100%;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.project-card-link .project-card {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.project-card-link:hover .project-card,
+.project-card-link:focus-visible .project-card {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent-border);
+}
+
+.project-card-cta {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  margin-bottom: 0;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .pill-list {
@@ -476,6 +538,122 @@ section[id] {
   line-height: 1.12;
   padding-bottom: 0.08em;
   overflow: visible;
+}
+
+.site-main--projects {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.projects-page-header {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.project-title {
+  margin-top: 0.5rem;
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  font-size: 1.5rem;
+  color: var(--text-h);
+}
+
+.grid--project-entries {
+  gap: 1rem;
+}
+
+.project-entry {
+  scroll-margin-top: calc(var(--anchor-offset) + 0.75rem);
+}
+
+.project-entry--active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.project-details-list {
+  margin: 0.75rem 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.project-entry .project-media {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 420px; /* same cap */
+  object-fit: contain;
+}
+
+.project-carousel {
+  display: grid;
+  gap: 0.7rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-carousel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 0.7rem;
+}
+
+.project-carousel-frame {
+  min-height: clamp(220px, 42vw, 420px);
+  max-height: 420px; /* hard cap */
+  display: grid;
+  place-items: center;
+  width: 100%;
+  touch-action: pan-y;
+}
+
+.project-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.project-carousel-button {
+  border: 1px solid var(--accent-border);
+  background: var(--bg);
+  color: var(--text-h);
+  border-radius: 0.55rem;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  cursor: pointer;
+}
+
+.project-carousel-count {
+  min-width: 3.25rem;
+  text-align: center;
+  color: var(--text-h);
+  font-size: 0.9rem;
+}
+
+.project-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.project-carousel-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent-border);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.project-carousel-dot.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
 }
 /* #endregion Contact, footer, and typography helpers */
 
@@ -628,6 +806,16 @@ button:focus-visible {
     background: var(--accent-bg);
     border-color: var(--accent-border);
     color: var(--accent);
+  }
+
+  .project-carousel-button {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
+
+  .project-carousel-dot {
+    width: 0.8rem;
+    height: 0.8rem;
   }
 }
 /* #endregion Focus and responsive breakpoints */

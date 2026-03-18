@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer({ name }) {
   return (
     <footer className="site-footer">
@@ -5,9 +7,9 @@ export default function Footer({ name }) {
         <p>
           © {new Date().getFullYear()} {name}. Built with React + Vite.
         </p>
-        <a href="#top" aria-label="Back to top">
-          Back to top ↑
-        </a>
+        <Link to="/" aria-label="Go to homepage">
+          Back to home ↑
+        </Link>
       </div>
     </footer>
   );

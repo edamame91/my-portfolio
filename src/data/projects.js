@@ -1,5 +1,75 @@
 export const projects = [
   {
+    id: "sheffield-city-council-app",
+    title: "Sheffield City Council Mobile App",
+    blurb: "A mobile application for city services and local information.",
+    impact:
+      "Worked in a team environment using Agile practices, iterative releases, and stakeholder feedback.",
+    tech: ["Flutter", "Dart", "Agile", "Mobile Development"],
+    repoUrl: "https://github.com/edamame91",
+    liveUrl: null,
+    details: [
+      "Collaborated in an Agile team to deliver service-directory and transit workflows through iterative milestones.",
+      "Improved usability by validating navigation patterns with regular stakeholder feedback and sprint reviews.",
+    ],
+    media: [
+      {
+        kind: "image",
+        src: "./projects/council/merged.png",
+        alt: "City council app home screen",
+      },
+      {
+        kind: "image",
+        src: "./projects/council/bin-cal.png",
+        alt: "City services mobile app preview",
+      },
+      {
+        kind: "image",
+        src: "./projects/council/transport-map.png",
+        alt: "City council app transport map",
+      },
+      {
+        kind: "image",
+        src: "./projects/council/transport-list.png",
+        alt: "City council app transport list",
+      },
+    ],
+    featured: true,
+  },
+  {
+    id: "finance-tracker-csharp",
+    title: "Fin Track",
+    blurb:
+      "A C# personal finance tracker for logging transactions and reviewing spending trends.",
+    impact:
+      "Strengthened object-oriented design, data modelling, and desktop app architecture skills.",
+    tech: ["C#", ".NET", "OOP"],
+    repoUrl: "https://github.com/edamame91/FinTrack",
+    liveUrl: null,
+    details: [
+      "Created transaction logging and summary workflows focused on clarity and quick review of spending habits.",
+      "Structured the app around object-oriented principles to keep business rules readable and maintainable.",
+    ],
+    media: [
+      {
+        kind: "image",
+        src: "./projects/fintrack/cdr-sum.png",
+        alt: "Finance tracker dashboard preview",
+      },
+      {
+        kind: "image",
+        src: "./projects/fintrack/month-sum.png",
+        alt: "Finance tracker monthly summary",
+      },
+      {
+        kind: "image",
+        src: "./projects/fintrack/total.png",
+        alt: "Finance tracker totals screen",
+      },
+    ],
+    featured: true,
+  },
+  {
     id: "charity-donation-app",
     title: "Charity Donation Web App",
     blurb:
@@ -9,65 +79,51 @@ export const projects = [
     tech: ["React", "Node.js", "SQLite", "REST APIs"],
     repoUrl: "https://github.com/edamame91/Sustainwear",
     liveUrl: null,
+    details: [
+      "Built responsive donation journeys with campaign browsing, contribution flow states, and clear user feedback.",
+      "Implemented API-backed data handling patterns with reusable UI components to keep the product scalable.",
+    ],
     media: [
       {
         kind: "image",
-        src: "./placeholder.svg",
+        src: "./projects/sustainwear/dashboard.png",
         alt: "Charity donation app interface preview",
       },
-    ],
-    featured: true,
-  },
-  {
-    id: "finance-tracker-csharp",
-    title: "Finance Tracker Application",
-    blurb:
-      "A C# personal finance tracker for logging transactions and reviewing spending trends.",
-    impact:
-      "Strengthened object-oriented design, data modelling, and desktop app architecture skills.",
-    tech: ["C#", ".NET", "OOP"],
-    repoUrl: "https://github.com/edamame91/FinTrack",
-    liveUrl: null,
-    media: [
       {
         kind: "image",
-        src: "./placeholder.svg",
-        alt: "Finance tracker dashboard preview",
+        src: "./projects/sustainwear/inv-overview.png",
+        alt: "Charity donation app inventory overview",
       },
-    ],
-    featured: true,
-  },
-  {
-    id: "sheffield-city-council-app",
-    title: "Sheffield City Council Mobile App",
-    blurb: "A mobile application for city services and local information.",
-    impact:
-      "Worked in a team environment using Agile practices, iterative releases, and stakeholder feedback.",
-    tech: ["Flutter", "Dart", "Agile", "Mobile Development"],
-    repoUrl: "https://github.com/edamame91",
-    liveUrl: null,
-    media: [
       {
         kind: "image",
-        src: "./projects/council/bins.png",
-        alt: "City services mobile app preview",
+        src: "./projects/sustainwear/inv-category.png",
+        alt: "Charity donation app category view",
+      },
+      {
+        kind: "image",
+        src: "./projects/sustainwear/inv-search.png",
+        alt: "Charity donation app inventory search",
       },
     ],
     featured: true,
   },
   {
     id: "2-5d-unity-game",
-    title: "2.5D Unity Game",
+    title: "Echo Chamber",
     blurb: "A gameplay prototype built in Unity with C#.",
     impact:
       "Applied systems thinking to gameplay loops, state handling, and responsive interactions.",
     tech: ["Unity", "C#", "Game Development"],
     repoUrl: "https://github.com/edamame91",
     liveUrl: null,
+    details: [
+      "Designed a gameplay prototype with reusable interaction systems and manageable scene-level state transitions.",
+      "Balanced mechanics and moment-to-moment responsiveness to improve core-loop pacing and player feel.",
+    ],
     media: [
       {
         kind: "image",
-        src: "./placeholder.svg",
+        src: "./placeholder.png",
 
         alt: "2.5D Unity game scene preview",
       },

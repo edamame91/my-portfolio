@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
 import AboutSection from "./components/AboutSection";
 import ProjectsSection from "./components/ProjectsSection";
+import ProjectsPage from "./components/ProjectsPage";
 import SkillsSection from "./components/SkillsSection";
 import { profile } from "./data/profile";
 import { projects } from "./data/projects";
@@ -21,6 +22,37 @@ const THEME_OPTIONS = [
   "blueberry",
   "foam-banana",
 ];
+
+function HomePage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const section = params.get("section");
+
+    if (!section) {
+      return;
+    }
+
+    const target = document.getElementById(section);
+
+    if (!target) {
+      return;
+    }
+
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [location.search]);
+
+  return (
+    <main id="main-content" className="site-main">
+      <AboutSection profile={profile} />
+
+      <ProjectsSection projects={projects} />
+      <SkillsSection groups={skillGroups} />
+      <ContactSection email={profile.email} links={profile.links} />
+    </main>
+  );
+}
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -43,13 +75,14 @@ export default function App() {
         selectedTheme={theme}
         onThemeChange={setTheme}
       />
-      <main id="main-content" className="site-main">
-        <AboutSection profile={profile} />
-
-        <ProjectsSection projects={projects} />
-        <SkillsSection groups={skillGroups} />
-        <ContactSection email={profile.email} links={profile.links} />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/projects"
+          element={<ProjectsPage projects={projects} />}
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
       <Footer name={profile.name} />
     </>
   );

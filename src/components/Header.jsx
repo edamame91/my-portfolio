@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", to: "/?section=about", isPrimaryRoute: false },
+  { label: "Projects", to: "/projects", isPrimaryRoute: true },
+  { label: "Skills", to: "/?section=skills", isPrimaryRoute: false },
+  { label: "Contact", to: "/?section=contact", isPrimaryRoute: false },
 ];
 
 const themeOptions = [
@@ -23,8 +24,12 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
 
   const renderNavLinks = () =>
     navItems.map((item) => (
-      <li key={item.href}>
-        <a href={item.href}>{item.label}</a>
+      <li key={item.to}>
+        {item.isPrimaryRoute ? (
+          <NavLink to={item.to}>{item.label}</NavLink>
+        ) : (
+          <Link to={item.to}>{item.label}</Link>
+        )}
       </li>
     ));
 
@@ -60,9 +65,13 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
   return (
     <>
       <header className="site-header">
-        <a href="#top" className="brand text-gradient" aria-label="Back to top">
+        <Link
+          to="/"
+          className="brand text-gradient"
+          aria-label="Go to homepage"
+        >
           {name}
-        </a>
+        </Link>
 
         <div className="header-controls">
           <nav
