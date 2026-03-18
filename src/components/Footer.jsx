@@ -5,7 +5,7 @@ export default function Footer({ name }) {
     <footer className="site-footer">
       <div className="footer-main">
         <p>
-          © {new Date().getFullYear()} {name}. Built with React + Vite.
+          © {new Date().getFullYear()} {name}
         </p>
         <Link to="/" aria-label="Go to homepage">
           Back to home ↑
