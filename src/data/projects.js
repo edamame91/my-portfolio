@@ -2,7 +2,7 @@ export const projects = [
   {
     id: "sheffield-city-council-app",
     title: "Sheffield City Council Mobile App",
-    blurb: "A mobile application for city services and local information.",
+    blurb: "A mobile application for accessing city services and local information such as transport and events details. ",
     impact:
       "Worked in a team environment using Agile practices, iterative releases, and stakeholder feedback.",
     tech: ["Flutter", "Dart", "Agile", "Mobile Development"],
@@ -70,7 +70,7 @@ export const projects = [
     id: "charity-donation-app",
     title: "Charity Donation Web App",
     blurb:
-      "A full-stack donation platform with campaign browsing and contribution workflows.",
+      "A full-stack donation platform with role-based access control.",
     impact:
       "Demonstrated end-to-end product delivery from React UI to API and relational data layer.",
     tech: ["React", "Node.js", "SQLite", "REST APIs"],
