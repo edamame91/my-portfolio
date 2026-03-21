@@ -17,6 +17,9 @@ const THEME_KEY = "portfolio-theme";
 
 function HomePage() {
   const location = useLocation();
+  const homeProjects = projects
+    .filter((project) => project.showOnHome === true)
+    .slice(0, 4);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -39,7 +42,7 @@ function HomePage() {
     <main id="main-content" className="site-main">
       <AboutSection profile={profile} />
 
-      <ProjectsSection projects={projects} />
+      <ProjectsSection projects={homeProjects} />
       <SkillsSection groups={skillGroups} />
       <ContactSection email={profile.email} links={profile.links} />
     </main>
@@ -47,6 +50,10 @@ function HomePage() {
 }
 
 export default function App() {
+  const projectsPageProjects = projects.filter(
+    (project) => project.showOnProjectsPage === true,
+  );
+
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem(THEME_KEY);
     return THEME_OPTIONS.includes(savedTheme) ? savedTheme : "peppermint";
@@ -71,7 +78,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/projects"
-          element={<ProjectsPage projects={projects} />}
+          element={<ProjectsPage projects={projectsPageProjects} />}
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

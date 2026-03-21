@@ -46,6 +46,9 @@ function ProjectMedia({ item, projectTitle, priority = false }) {
 
 function ProjectCard({ project, priority = false }) {
   const [preview] = project.media || [];
+  const isTallCard = project.cardType === "tall";
+  const cardClassName = `card project-card${isTallCard ? " project-card--tall" : ""}`;
+  const mediaFrameClassName = `project-card-media-frame${isTallCard ? " project-card-media-frame--tall" : ""}`;
 
   return (
     <Link
@@ -53,13 +56,15 @@ function ProjectCard({ project, priority = false }) {
       to={`/projects?entry=${encodeURIComponent(project.id)}`}
       aria-label={`Open full project entry for ${project.title}`}
     >
-      <article className="card project-card">
+      <article className={cardClassName}>
         {preview ? (
-          <ProjectMedia
-            item={preview}
-            projectTitle={project.title}
-            priority={priority}
-          />
+          <div className={mediaFrameClassName}>
+            <ProjectMedia
+              item={preview}
+              projectTitle={project.title}
+              priority={priority}
+            />
+          </div>
         ) : null}
         <div className="project-card-top">
           <h3 className="project-card-title">{project.title}</h3>

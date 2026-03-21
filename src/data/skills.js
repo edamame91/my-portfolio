@@ -29,6 +29,22 @@ export const skillGroups = [
   },
   {
     category: "Tools & DevOps",
-    items: ["Git", "GitHub", "GitHub Actions", "Docker", "Jira", "Unity"],
+    items: [
+      "Git",
+      "GitHub",
+      "GitHub Actions",
+      "Docker",
+      "Jira",
+      "Unity",
+      "Figma",
+    ],
+  },
+  {
+    category: "UX Engineering",
+    items: ["Component systems", "WCAG 2.1 AA", "Design token principles"],
+  },
+  {
+    category: "AI Development",
+    items: ["Claude API", "Cursor", "Claude Code"],
   },
 ];

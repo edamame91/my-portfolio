@@ -2,7 +2,8 @@ export const projects = [
   {
     id: "sheffield-city-council-app",
     title: "Sheffield City Council Mobile App",
-    blurb: "A mobile application for accessing city services and local information such as transport and events details. ",
+    blurb:
+      "A mobile application for accessing city services and local information such as transport and events details. ",
     impact:
       "Worked in a team environment using Agile practices, iterative releases, and stakeholder feedback.",
     tech: ["Flutter", "Dart", "Agile", "Mobile Development"],
@@ -31,6 +32,9 @@ export const projects = [
         alt: "City council app demo walkthrough",
       },
     ],
+    cardType: "tall",
+    showOnHome: true,
+    showOnProjectsPage: true,
     featured: true,
   },
   {
@@ -64,13 +68,15 @@ export const projects = [
         alt: "Finance tracker totals screen",
       },
     ],
+    cardType: "tall",
+    showOnHome: true,
+    showOnProjectsPage: true,
     featured: true,
   },
   {
     id: "charity-donation-app",
     title: "Charity Donation Web App",
-    blurb:
-      "A full-stack donation platform with role-based access control.",
+    blurb: "A full-stack donation platform with role-based access control.",
     impact:
       "Demonstrated end-to-end product delivery from React UI to API and relational data layer.",
     tech: ["React", "Node.js", "SQLite", "REST APIs"],
@@ -109,7 +115,47 @@ export const projects = [
         alt: "Sustainwear demo walkthrough",
       },
     ],
+    showOnHome: true,
+    showOnProjectsPage: true,
     featured: true,
+  },
+  {
+    id: "ux-auditor",
+    title: "UX Auditor",
+    blurb:
+      "An AI-powered interface audit tool that analyses web products and returns structured UX findings across visual hierarchy, accessibility, design system consistency, and more.",
+    impact:
+      "Built end-to-end using the Claude API with an agentic tool-use loop. Claude calls three specialist skills before synthesising a full audit report.",
+    tech: ["React", "TypeScript", "Claude API", "Vite", "Tailwind", "Cursor"],
+    repoUrl: "https://github.com/edamame91/ux-auditor",
+    liveUrl: null,
+    details: [
+      "Implemented an agentic tool-use loop where Claude calls three function-calling skills: a design system checker, WCAG validator, and component pattern detector.",
+      "Design system checker validates spacing against an 8pt grid, font sizes against a standard type scale, and flags colour token proliferation.",
+      "WCAG validator maps accessibility findings to specific WCAG 2.1 AA criteria (contrast, focus visibility, name/role/value) with high/medium/low severity levels.",
+      "Component pattern detector identifies inconsistent implementations of the same UI pattern, directly relevant to design system maintenance work.",
+      "Added prompt caching on the system prompt to reduce API costs across repeated audit calls.",
+      "Supports both URL-based audits and screenshot uploads, with audit history persisted to localStorage.",
+    ],
+    media: [
+      {
+        kind: "image",
+        src: "./projects/ux-auditor/pendo.webp",
+        alt: "UX Auditor main dashboard showing audit input and results",
+      },
+      {
+        kind: "image",
+        src: "./projects/ux-auditor/pendo-nav.webp",
+        alt: "Audit findings for navigation and wayfinding",
+      },
+      {
+        kind: "image",
+        src: "./projects/ux-auditor/pendo-design.webp",
+        alt: "Audit findings panel for design system and component consistency",
+      },
+    ],
+    showOnHome: true,
+    showOnProjectsPage: true,
   },
   {
     id: "2-5d-unity-game",
@@ -132,6 +178,8 @@ export const projects = [
         alt: "2.5D Unity game scene preview",
       },
     ],
+    showOnHome: false,
+    showOnProjectsPage: true,
     featured: false,
   },
 ];
