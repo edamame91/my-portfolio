@@ -179,7 +179,7 @@ export const projects = [
       },
     ],
     showOnHome: false,
-    showOnProjectsPage: true,
+    showOnProjectsPage: false,
     featured: false,
   },
 ];
