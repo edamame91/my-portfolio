@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/my-portfolio/favicon-salmon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -12,10 +12,6 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Allow Google Fonts, CDN styles/fonts, and external images when served from GitHub Pages -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self' data:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com data:;"
-    />
     <meta
       name="description"
       content="Alex Abraham — first-class Software Engineering student focused on C#, systems programming, and full-stack development."
@@ -31,8 +27,11 @@
       property="og:description"
       content="Projects and engineering work in C#, React, Node.js, Flutter, and Unity. Open to Year in Industry opportunities."
     />
-    <meta property="og:url" content="/my-portfolio/" />
-    <meta property="og:image" content="/my-portfolio/hero.png" />
+    <meta
+      property="og:url"
+      content="https://alex-abraham.dev"
+      data-vite-ignore
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -42,7 +41,7 @@
       name="twitter:description"
       content="First-class Software Engineering student focused on production-ready software development."
     />
-    <link rel="canonical" href="/my-portfolio/" />
+    <link rel="canonical" href="https://alex-abraham.dev" data-vite-ignore />
     <title>Alex Abraham | Software Engineering Portfolio</title>
     <script>
       const redirect = sessionStorage.getItem("redirect");
@@ -51,8 +50,8 @@
         window.history.replaceState(null, "", redirect);
       }
     </script>
-    <script type="module" crossorigin src="/my-portfolio/assets/index-D5FKPTHD.js"></script>
-    <link rel="stylesheet" crossorigin href="/my-portfolio/assets/index-C1teJb2p.css">
+    <script type="module" crossorigin src="/assets/index-DkNRcDgE.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C1teJb2p.css">
   </head>
   <body>
     <div id="root"></div>
