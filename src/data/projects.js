@@ -19,29 +19,29 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./projects/council/home.webp",
+        src: import.meta.env.BASE_URL + "projects/council/home.webp",
         alt: "City council app home screen & weather",
       },
       {
         kind: "image",
-        src: "./projects/council/transport.webp",
+        src: import.meta.env.BASE_URL + "projects/council/transport.webp",
         alt: "City council app transport list and map",
       },
       {
         kind: "image",
-        src: "./projects/council/bins.webp",
+        src: import.meta.env.BASE_URL + "projects/council/bins.webp",
         alt: "City council app bins view",
       },
       {
         kind: "image",
-        src: "./projects/council/settings.webp",
+        src: import.meta.env.BASE_URL + "projects/council/settings.webp",
         alt: "City council app settings view",
       },
       {
         kind: "video",
-        src: "./projects/council/sheffield-demo.mp4",
+        src: import.meta.env.BASE_URL + "projects/council/sheffield-demo.mp4",
         type: "video/mp4",
-        poster: "./projects/council/home-p.webp",
+        poster: import.meta.env.BASE_URL + "projects/council/home-p.webp",
         alt: "City council app demo walkthrough",
       },
     ],
@@ -67,17 +67,17 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./projects/fintrack/cdr-sum.webp",
+        src: import.meta.env.BASE_URL + "projects/fintrack/cdr-sum.webp",
         alt: "Finance tracker dashboard preview",
       },
       {
         kind: "image",
-        src: "./projects/fintrack/month-sum.webp",
+        src: import.meta.env.BASE_URL + "projects/fintrack/month-sum.webp",
         alt: "Finance tracker monthly summary",
       },
       {
         kind: "image",
-        src: "./projects/fintrack/total.webp",
+        src: import.meta.env.BASE_URL + "projects/fintrack/total.webp",
         alt: "Finance tracker totals screen",
       },
     ],
@@ -102,29 +102,34 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./projects/sustainwear/dashboard.webp",
+        src: import.meta.env.BASE_URL + "projects/sustainwear/dashboard.webp",
         alt: "Charity donation app interface preview",
       },
       {
         kind: "image",
-        src: "./projects/sustainwear/inv-overview.webp",
+        src:
+          import.meta.env.BASE_URL + "projects/sustainwear/inv-overview.webp",
         alt: "Charity donation app inventory overview",
       },
       {
         kind: "image",
-        src: "./projects/sustainwear/inv-category.webp",
+        src:
+          import.meta.env.BASE_URL + "projects/sustainwear/inv-category.webp",
         alt: "Charity donation app category view",
       },
       {
         kind: "image",
-        src: "./projects/sustainwear/inv-search.webp",
+        src: import.meta.env.BASE_URL + "projects/sustainwear/inv-search.webp",
         alt: "Charity donation app inventory search",
       },
       {
         kind: "video",
-        src: "./projects/sustainwear/sustainwear-demo.mp4",
+        src:
+          import.meta.env.BASE_URL +
+          "projects/sustainwear/sustainwear-demo.mp4",
         type: "video/mp4",
-        poster: "./projects/sustainwear/dashboard.webp",
+        poster:
+          import.meta.env.BASE_URL + "projects/sustainwear/dashboard.webp",
         alt: "Sustainwear demo walkthrough",
       },
     ],
@@ -153,17 +158,17 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./projects/ux-auditor/pendo.webp",
+        src: import.meta.env.BASE_URL + "projects/ux-auditor/pendo.webp",
         alt: "UX Auditor main dashboard showing audit input and results",
       },
       {
         kind: "image",
-        src: "./projects/ux-auditor/pendo-nav.webp",
+        src: import.meta.env.BASE_URL + "projects/ux-auditor/pendo-nav.webp",
         alt: "Audit findings for navigation and wayfinding",
       },
       {
         kind: "image",
-        src: "./projects/ux-auditor/pendo-design.webp",
+        src: import.meta.env.BASE_URL + "projects/ux-auditor/pendo-design.webp",
         alt: "Audit findings panel for design system and component consistency",
       },
     ],
@@ -186,7 +191,7 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: "./placeholder.webp",
+        src: import.meta.env.BASE_URL + "placeholder.webp",
 
         alt: "2.5D Unity game scene preview",
       },

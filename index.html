@@ -11,6 +11,11 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Allow Google Fonts, CDN styles/fonts, and external images when served from GitHub Pages -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' data:; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com data:;"
+    />
     <meta
       name="description"
       content="Alex Abraham — first-class Software Engineering student focused on C#, systems programming, and full-stack development."
@@ -26,11 +31,8 @@
       property="og:description"
       content="Projects and engineering work in C#, React, Node.js, Flutter, and Unity. Open to Year in Industry opportunities."
     />
-    <meta
-      property="og:url"
-      content="https://edamame91.github.io/my-portfolio/"
-    />
-    <meta property="og:image" content="/hero.png" />
+    <meta property="og:url" content="%BASE_URL%" />
+    <meta property="og:image" content="%BASE_URL%hero.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -40,7 +42,7 @@
       name="twitter:description"
       content="First-class Software Engineering student focused on production-ready software development."
     />
-    <link rel="canonical" href="https://edamame91.github.io/my-portfolio/" />
+    <link rel="canonical" href="%BASE_URL%" />
     <title>Alex Abraham | Software Engineering Portfolio</title>
   </head>
   <body>
