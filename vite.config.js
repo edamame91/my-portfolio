@@ -5,6 +5,6 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   // when deploying to GitHub Pages for a project site, set base to
   // the repository name so assets load from the correct subpath
-  base: "/my-portfolio/",
+  base: "/",
   plugins: [react(), tailwindcss()],
 });
