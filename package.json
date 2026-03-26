@@ -1,7 +1,8 @@
 {
+  "homepage": "https://alex-abraham.dev",
   "name": "my-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -30,4 +31,5 @@
     "tailwindcss": "^4.2.1",
     "vite": "^8.0.0"
   }
+
 }
