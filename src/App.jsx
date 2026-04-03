@@ -43,16 +43,22 @@ function HomePage() {
   return (
     <main id="main-content" className="site-main">
       <Link
-        className="about-section-link"
+        className="about-section-link home-reveal home-reveal--1"
         to="/about"
         aria-label="Read full about page"
       >
         <AboutSection profile={profile} />
       </Link>
 
-      <ProjectsSection projects={homeProjects} />
-      <SkillsSection groups={skillGroups} />
-      <ContactSection email={profile.email} links={profile.links} />
+      <div className="home-reveal home-reveal--2">
+        <ProjectsSection projects={homeProjects} />
+      </div>
+      <div className="home-reveal home-reveal--3">
+        <SkillsSection groups={skillGroups} />
+      </div>
+      <div className="home-reveal home-reveal--4">
+        <ContactSection email={profile.email} links={profile.links} />
+      </div>
     </main>
   );
 }
@@ -112,11 +118,7 @@ export default function App() {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <Footer
-        name={profile.name}
-        colorMode={colorMode}
-        onToggleColorMode={handleToggleColorMode}
-      />
+      <Footer colorMode={colorMode} onToggleColorMode={handleToggleColorMode} />
     </>
   );
 }

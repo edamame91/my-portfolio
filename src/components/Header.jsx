@@ -11,21 +11,34 @@ const navItems = [
 
 export default function Header({ name, selectedTheme, onThemeChange }) {
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
-  const themeMenuRef = useRef(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const desktopThemeMenuRef = useRef(null);
+  const mobileThemeMenuRef = useRef(null);
 
-  const renderNavLinks = () =>
+  function closeMobileMenu() {
+    setIsThemeMenuOpen(false);
+    setIsMobileMenuOpen(false);
+  }
+
+  const renderNavLinks = (onNavigate) =>
     navItems.map((item) => (
       <li key={item.to}>
-        <Link to={item.to}>{item.label}</Link>
+        <Link to={item.to} onClick={onNavigate}>
+          {item.label}
+        </Link>
       </li>
     ));
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        themeMenuRef.current &&
-        !themeMenuRef.current.contains(event.target)
-      ) {
+      const isInsideDesktopThemeMenu =
+        desktopThemeMenuRef.current &&
+        desktopThemeMenuRef.current.contains(event.target);
+      const isInsideMobileThemeMenu =
+        mobileThemeMenuRef.current &&
+        mobileThemeMenuRef.current.contains(event.target);
+
+      if (!isInsideDesktopThemeMenu && !isInsideMobileThemeMenu) {
         setIsThemeMenuOpen(false);
       }
     }
@@ -33,6 +46,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
     function handleEscape(event) {
       if (event.key === "Escape") {
         setIsThemeMenuOpen(false);
+        setIsMobileMenuOpen(false);
       }
     }
 
@@ -49,14 +63,51 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
     THEME_MENU_OPTIONS.find((theme) => theme.value === selectedTheme)?.label ??
     "Select theme";
 
+  function renderThemeSelector(menuRef, className) {
+    return (
+      <div className={`theme-select-wrap ${className}`} ref={menuRef}>
+        <button
+          type="button"
+          className="theme-select theme-menu-trigger"
+          aria-haspopup="listbox"
+          aria-label="Select theme"
+          aria-expanded={isThemeMenuOpen}
+          onClick={() => setIsThemeMenuOpen((prev) => !prev)}
+        >
+          <span>{selectedThemeLabel}</span>
+          <span aria-hidden="true">▾</span>
+        </button>
+
+        {isThemeMenuOpen ? (
+          <ul className="theme-menu" role="listbox" aria-label="Theme options">
+            {THEME_MENU_OPTIONS.map((theme) => {
+              const isSelected = theme.value === selectedTheme;
+
+              return (
+                <li key={theme.value} role="option" aria-selected={isSelected}>
+                  <button
+                    type="button"
+                    className={`theme-option${isSelected ? " is-active" : ""}`}
+                    onClick={() => {
+                      onThemeChange(theme.value);
+                      setIsThemeMenuOpen(false);
+                    }}
+                  >
+                    {theme.label}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        ) : null}
+      </div>
+    );
+  }
+
   return (
     <>
       <header className="site-header">
-        <Link
-          to="/"
-          className="brand"
-          aria-label="Go to homepage"
-        >
+        <Link to="/" className="brand" aria-label="Go to homepage">
           {name}
         </Link>
 
@@ -68,55 +119,44 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
             <ul>{renderNavLinks()}</ul>
           </nav>
 
-          <div className="theme-select-wrap" ref={themeMenuRef}>
-            <button
-              type="button"
-              className="theme-select theme-menu-trigger"
-              aria-haspopup="listbox"
-              aria-label="Select theme"
-              aria-expanded={isThemeMenuOpen}
-              onClick={() => setIsThemeMenuOpen((prev) => !prev)}
-            >
-              <span>{selectedThemeLabel}</span>
-              <span aria-hidden="true">▾</span>
-            </button>
+          {renderThemeSelector(
+            desktopThemeMenuRef,
+            "theme-select-wrap--desktop",
+          )}
 
-            {isThemeMenuOpen ? (
-              <ul
-                className="theme-menu"
-                role="listbox"
-                aria-label="Theme options"
-              >
-                {THEME_MENU_OPTIONS.map((theme) => {
-                  const isSelected = theme.value === selectedTheme;
-
-                  return (
-                    <li
-                      key={theme.value}
-                      role="option"
-                      aria-selected={isSelected}
-                    >
-                      <button
-                        type="button"
-                        className={`theme-option${isSelected ? " is-active" : ""}`}
-                        onClick={() => {
-                          onThemeChange(theme.value);
-                          setIsThemeMenuOpen(false);
-                        }}
-                      >
-                        {theme.label}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : null}
-          </div>
+          <button
+            type="button"
+            className="mobile-menu-toggle"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-nav-menu"
+            onClick={() => {
+              setIsThemeMenuOpen(false);
+              setIsMobileMenuOpen((prev) => !prev);
+            }}
+          >
+            <span aria-hidden="true">{isMobileMenuOpen ? "✕" : "☰"}</span>
+          </button>
         </div>
       </header>
 
-      <nav className="mobile-nav" aria-label="Mobile navigation">
-        <ul>{renderNavLinks()}</ul>
+      <nav
+        id="mobile-nav-menu"
+        className={`mobile-nav${isMobileMenuOpen ? " is-open" : ""}`}
+        aria-label="Mobile navigation"
+        aria-hidden={!isMobileMenuOpen}
+      >
+        <button
+          type="button"
+          className="mobile-nav-backdrop"
+          onClick={closeMobileMenu}
+          aria-label="Close navigation menu"
+          tabIndex={isMobileMenuOpen ? 0 : -1}
+        />
+        <div className="mobile-nav-panel">
+          <ul>{renderNavLinks(closeMobileMenu)}</ul>
+          {renderThemeSelector(mobileThemeMenuRef, "theme-select-wrap--mobile")}
+        </div>
       </nav>
     </>
   );
