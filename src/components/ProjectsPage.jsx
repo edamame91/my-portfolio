@@ -10,7 +10,7 @@ function ProjectMedia({ item, projectTitle, priority = false, sizes }) {
           .map(([width, src]) => `${src} ${width}w`)
           .join(", ")
     : undefined;
-  const resolvedSizes = sizes || item.sizes || "(max-width: 900px) 100vw, 80vw";
+  const resolvedSizes = sizes || item.sizes || "(max-width: 900px) 100vw, 94vw";
 
   if (item.kind === "video") {
     return (
@@ -472,8 +472,13 @@ function FullProjectEntry({ project, isActive, isFirst }) {
       ) : null}
 
       <div className="project-card-description">
-        <p>{project.blurb}</p>
-        <p className="project-card-impact">{project.impact}</p>
+        <p className="project-summary-line">
+          <span className="project-detail-label">Overview:</span>{" "}
+          {project.blurb}
+        </p>
+        <p className="project-summary-line">
+          <span className="project-detail-label">Impact:</span> {project.impact}
+        </p>
 
         {project.details?.length ? (
           <ul
