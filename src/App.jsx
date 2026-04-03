@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import AboutSection from "./components/AboutSection";
+import AboutPage from "./components/AboutPage";
 import ProjectsSection from "./components/ProjectsSection";
 import ProjectsPage from "./components/ProjectsPage";
 import SkillsSection from "./components/SkillsSection";
@@ -14,6 +15,7 @@ import { skillGroups } from "./data/skills";
 import { THEME_OPTIONS } from "./data/themes";
 
 const THEME_KEY = "portfolio-theme";
+const COLOR_MODE_KEY = "portfolio-color-mode";
 
 function HomePage() {
   const location = useLocation();
@@ -40,7 +42,13 @@ function HomePage() {
 
   return (
     <main id="main-content" className="site-main">
-      <AboutSection profile={profile} />
+      <Link
+        className="about-section-link"
+        to="/about"
+        aria-label="Read full about page"
+      >
+        <AboutSection profile={profile} />
+      </Link>
 
       <ProjectsSection projects={homeProjects} />
       <SkillsSection groups={skillGroups} />
@@ -59,10 +67,31 @@ export default function App() {
     return THEME_OPTIONS.includes(savedTheme) ? savedTheme : "peppermint";
   });
 
+  const [colorMode, setColorMode] = useState(() => {
+    const savedColorMode = localStorage.getItem(COLOR_MODE_KEY);
+
+    if (savedColorMode === "light" || savedColorMode === "dark") {
+      return savedColorMode;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem(THEME_KEY, theme);
   }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-color-mode", colorMode);
+    localStorage.setItem(COLOR_MODE_KEY, colorMode);
+  }, [colorMode]);
+
+  function handleToggleColorMode() {
+    setColorMode((currentMode) => (currentMode === "light" ? "dark" : "light"));
+  }
 
   return (
     <>
@@ -76,13 +105,18 @@ export default function App() {
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route
           path="/projects"
           element={<ProjectsPage projects={projectsPageProjects} />}
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <Footer name={profile.name} />
+      <Footer
+        name={profile.name}
+        colorMode={colorMode}
+        onToggleColorMode={handleToggleColorMode}
+      />
     </>
   );
 }

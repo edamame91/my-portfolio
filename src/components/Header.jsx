@@ -54,7 +54,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
       <header className="site-header">
         <Link
           to="/"
-          className="brand text-gradient"
+          className="brand"
           aria-label="Go to homepage"
         >
           {name}

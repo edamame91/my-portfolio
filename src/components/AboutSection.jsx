@@ -2,7 +2,6 @@ export default function AboutSection({ profile }) {
   const frameworkLogos = profile.frameworkLogos ?? [];
 
   return (
-    <section id="about" className="hero-panel" aria-labelledby="hero-heading">
       <div className="about-content">
         <article className="card about-card">
           <h2 id="hero-heading" className="section-header">
@@ -35,6 +34,5 @@ export default function AboutSection({ profile }) {
           </ul>
         </article>
       </div>
-    </section>
   );
 }

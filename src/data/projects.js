@@ -54,7 +54,7 @@ export const projects = [
     id: "finance-tracker-csharp",
     title: "Fin Track",
     blurb:
-      "A C# personal finance tracker for logging transactions and reviewing spending trends.",
+      "A C# personal finance tracker for logging transactions and reviewing spending trends. Allows users to create and track budgets, generate spending reports and export data.",
     impact:
       "Strengthened object-oriented design, data modelling, and desktop app architecture skills.",
     tech: ["C#", ".NET", "OOP"],
@@ -89,7 +89,7 @@ export const projects = [
   {
     id: "charity-donation-app",
     title: "Charity Donation Web App",
-    blurb: "A full-stack donation platform with role-based access control.",
+    blurb: "A full-stack donation platform with role-based access control. Features tailored dashboards for donors, admins and charity staff, with inventory management and analytics.",
     impact:
       "Demonstrated end-to-end product delivery from React UI to API and relational data layer.",
     tech: ["React", "Node.js", "SQLite", "REST APIs"],

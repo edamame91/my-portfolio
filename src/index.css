@@ -158,7 +158,7 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -275,11 +275,28 @@
 /* #endregion Theme mappings */
 
 /* #region Dark mode overrides */
+:root[data-color-mode="dark"] {
+  --text: var(--theme-color-200);
+  --text-h: var(--theme-color-50);
+  --bg: #020911;
+  --border: var(--theme-color-800);
+  --code-bg: #0d1b2a;
+  --accent: var(--theme-color-300);
+  --accent-bg: color-mix(in srgb, var(--theme-color-400) 18%, transparent);
+  --accent-border: color-mix(in srgb, var(--theme-color-300) 48%, transparent);
+  --accent-contrast: #081018;
+  --accent-contrast-shadow: none;
+  --social-bg: color-mix(in srgb, var(--theme-color-900) 75%, transparent);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  color-scheme: dark;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-color-mode]) {
     --text: var(--theme-color-200);
     --text-h: var(--theme-color-50);
-    --bg: #09131f;
+    --bg: #020911;
     --border: var(--theme-color-800);
     --code-bg: #0d1b2a;
     --accent: var(--theme-color-300);
@@ -294,6 +311,7 @@
     --social-bg: color-mix(in srgb, var(--theme-color-900) 75%, transparent);
     --shadow:
       rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    color-scheme: dark;
   }
 }
 /* #endregion Dark mode overrides */
@@ -305,7 +323,6 @@ body {
 }
 
 #root {
-  width: min(1400px, 100%);
   max-width: 100%;
   margin: 0 auto;
   min-height: 100svh;
@@ -359,7 +376,6 @@ h4 {
 }
 
 a {
-  color: var(--accent);
   text-decoration: none;
 }
 
