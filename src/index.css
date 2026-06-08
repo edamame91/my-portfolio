@@ -1,4 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import "tailwindcss";
+
+/* expose tokens as tailwind colour + font classes (kept in sync at runtime) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-active: var(--border-active);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-accent-dim: var(--accent-dim);
+  --font-sans: "Syne", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
 
 /* #region Root theme tokens and global variables */
 :root {
@@ -138,26 +159,37 @@
   --theme-color-950: var(--peppermint-950);
   /* #endregion Active theme alias */
 
-  --text: var(--theme-color-800);
-  --text-h: var(--theme-color-900);
-  --bg: #f8fbfd;
-  --border: var(--theme-color-200);
-  --code-bg: var(--theme-color-50);
-  --accent: var(--theme-color-700);
-  --accent-bg: color-mix(in srgb, var(--theme-color-500) 16%, transparent);
-  --accent-border: color-mix(in srgb, var(--theme-color-700) 45%, transparent);
+  /* #region Surface and text tokens (light, default accent = pink) */
+  --bg: #fffcfa;
+  --surface: #ffffff;
+  --surface-2: #f4f8fa;
+  --border: #bdd2de;
+  --border-active: #93b5c6;
+  --text: #18232b;
+  --text-muted: #2b3d49;
+  --text-dim: #415766;
+  --accent: #b4496f;
+  --accent-strong: #8f3554;
   --accent-contrast: #ffffff;
-  --accent-contrast-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-  --social-bg: color-mix(in srgb, var(--theme-color-100) 75%, transparent);
+  --accent-dim: rgba(255, 115, 152, 0.2);
+  /* #endregion */
+
+  /* back-compat aliases so existing App.css keeps working */
+  --text-h: var(--text);
+  --accent-bg: var(--accent-dim);
+  --accent-border: var(--border-active);
+  --code-bg: var(--surface-2);
+  --social-bg: var(--surface-2);
+  --accent-contrast-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    0 1px 2px rgba(24, 35, 43, 0.04), 0 10px 24px -8px rgba(24, 35, 43, 0.14);
 
-  --sans: "Oxygen", "Segoe UI", Roboto, sans-serif;
-  --heading: "Oxygen", "Segoe UI", Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: "Syne", "Segoe UI", Roboto, sans-serif;
+  --heading: "DM Sans", "Syne", "Segoe UI", Roboto, sans-serif;
+  --mono: "DM Mono", ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  font: 18px/1.6 var(--sans);
+  letter-spacing: 0.1px;
   color-scheme: light;
   color: var(--text);
   background: var(--bg);
@@ -165,6 +197,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 200ms,
+    color 200ms;
 
   @media (max-width: 1024px) {
     font-size: 16px;
@@ -274,43 +309,120 @@
 
 /* #endregion Theme mappings */
 
+/* #region Per-theme accent overrides */
+/* peppermint (default) inherits the pink accent from :root. */
+/* the other 6 only re-point the accent tokens; neutrals stay constant. */
+:root[data-theme="raspberry"] {
+  --accent: var(--raspberry-700);
+  --accent-strong: var(--raspberry-800);
+  --accent-dim: color-mix(in srgb, var(--raspberry-500) 20%, transparent);
+}
+:root[data-theme="pistachio"] {
+  --accent: var(--pistachio-700);
+  --accent-strong: var(--pistachio-800);
+  --accent-dim: color-mix(in srgb, var(--pistachio-500) 20%, transparent);
+}
+:root[data-theme="cantelope"] {
+  --accent: var(--cantelope-700);
+  --accent-strong: var(--cantelope-800);
+  --accent-dim: color-mix(in srgb, var(--cantelope-500) 20%, transparent);
+}
+:root[data-theme="grape"] {
+  --accent: var(--grape-700);
+  --accent-strong: var(--grape-800);
+  --accent-dim: color-mix(in srgb, var(--grape-500) 20%, transparent);
+}
+:root[data-theme="blueberry"] {
+  --accent: var(--blueberry-700);
+  --accent-strong: var(--blueberry-800);
+  --accent-dim: color-mix(in srgb, var(--blueberry-500) 20%, transparent);
+}
+:root[data-theme="foam-banana"] {
+  --accent: var(--foam-banana-700);
+  --accent-strong: var(--foam-banana-800);
+  --accent-dim: color-mix(in srgb, var(--foam-banana-500) 20%, transparent);
+}
+
+/* dark mode brightens the accent shades so they read on dark surfaces */
+:root[data-color-mode="dark"][data-theme="raspberry"] {
+  --accent: var(--raspberry-300);
+  --accent-strong: var(--raspberry-200);
+  --accent-dim: color-mix(in srgb, var(--raspberry-400) 25%, transparent);
+}
+:root[data-color-mode="dark"][data-theme="pistachio"] {
+  --accent: var(--pistachio-300);
+  --accent-strong: var(--pistachio-200);
+  --accent-dim: color-mix(in srgb, var(--pistachio-400) 25%, transparent);
+}
+:root[data-color-mode="dark"][data-theme="cantelope"] {
+  --accent: var(--cantelope-300);
+  --accent-strong: var(--cantelope-200);
+  --accent-dim: color-mix(in srgb, var(--cantelope-400) 25%, transparent);
+}
+:root[data-color-mode="dark"][data-theme="grape"] {
+  --accent: var(--grape-300);
+  --accent-strong: var(--grape-200);
+  --accent-dim: color-mix(in srgb, var(--grape-400) 25%, transparent);
+}
+:root[data-color-mode="dark"][data-theme="blueberry"] {
+  --accent: var(--blueberry-300);
+  --accent-strong: var(--blueberry-200);
+  --accent-dim: color-mix(in srgb, var(--blueberry-400) 25%, transparent);
+}
+:root[data-color-mode="dark"][data-theme="foam-banana"] {
+  --accent: var(--foam-banana-300);
+  --accent-strong: var(--foam-banana-200);
+  --accent-dim: color-mix(in srgb, var(--foam-banana-400) 25%, transparent);
+}
+/* #endregion Per-theme accent overrides */
+
 /* #region Dark mode overrides */
 :root[data-color-mode="dark"] {
-  --text: var(--theme-color-200);
-  --text-h: var(--theme-color-50);
-  --bg: #020911;
-  --border: var(--theme-color-800);
-  --code-bg: #0d1b2a;
-  --accent: var(--theme-color-300);
-  --accent-bg: color-mix(in srgb, var(--theme-color-400) 18%, transparent);
-  --accent-border: color-mix(in srgb, var(--theme-color-300) 48%, transparent);
-  --accent-contrast: #081018;
+  --bg: #121212;
+  --surface: #1b1b1b;
+  --surface-2: #252525;
+  --border: #3d4850;
+  --border-active: #5f7380;
+  --text: #f3f8fb;
+  --text-muted: #dde8ef;
+  --text-dim: #c2d2dc;
+  --accent: #ff7398;
+  --accent-strong: #ff9ab5;
+  --accent-contrast: #0b1220;
+  --accent-dim: rgba(255, 115, 152, 0.25);
+
+  --text-h: var(--text);
+  --accent-bg: var(--accent-dim);
+  --accent-border: var(--border-active);
+  --code-bg: var(--surface-2);
+  --social-bg: var(--surface-2);
   --accent-contrast-shadow: none;
-  --social-bg: color-mix(in srgb, var(--theme-color-900) 75%, transparent);
-  --shadow:
-    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 28px -8px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-color-mode]) {
-    --text: var(--theme-color-200);
-    --text-h: var(--theme-color-50);
-    --bg: #020911;
-    --border: var(--theme-color-800);
-    --code-bg: #0d1b2a;
-    --accent: var(--theme-color-300);
-    --accent-bg: color-mix(in srgb, var(--theme-color-400) 18%, transparent);
-    --accent-border: color-mix(
-      in srgb,
-      var(--theme-color-300) 48%,
-      transparent
-    );
-    --accent-contrast: #081018;
+    --bg: #121212;
+    --surface: #1b1b1b;
+    --surface-2: #252525;
+    --border: #3d4850;
+    --border-active: #5f7380;
+    --text: #f3f8fb;
+    --text-muted: #dde8ef;
+    --text-dim: #c2d2dc;
+    --accent: #ff7398;
+    --accent-strong: #ff9ab5;
+    --accent-contrast: #0b1220;
+    --accent-dim: rgba(255, 115, 152, 0.25);
+
+    --text-h: var(--text);
+    --accent-bg: var(--accent-dim);
+    --accent-border: var(--border-active);
+    --code-bg: var(--surface-2);
+    --social-bg: var(--surface-2);
     --accent-contrast-shadow: none;
-    --social-bg: color-mix(in srgb, var(--theme-color-900) 75%, transparent);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 28px -8px rgba(0, 0, 0, 0.5);
     color-scheme: dark;
   }
 }
@@ -340,14 +452,25 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
 /* #endregion Base document and app shell */
 
 /* #region Typography and inline elements */
 h1,
-h2 {
+h2,
+h3 {
   font-family: var(--heading);
   font-weight: 600;
+  line-height: 1.2;
   color: var(--text-h);
+}
+
+p {
+  line-height: 1.6;
 }
 
 h1 {
@@ -369,7 +492,7 @@ h2 {
 }
 
 h4 {
-  font-family: var(--heading);
+  font-family: Oxygen;
   font-weight: 400;
   color: var(--text-h);
   font-size: clamp(1rem, 2vw, 1rem);
@@ -393,3 +516,20 @@ code {
   background: var(--code-bg);
 }
 /* #endregion Typography and inline elements */
+
+/* #region Scrollbar and selection */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+/* #endregion Scrollbar and selection */

@@ -9,7 +9,7 @@ export const THEME_OPTIONS = [
 ];
 
 export const THEME_MENU_OPTIONS = [
-  { label: "Peppermint", value: "peppermint" },
+  { label: "Default", value: "peppermint" },
   { label: "Raspberry", value: "raspberry" },
   { label: "Pistachio", value: "pistachio" },
   { label: "Cantelope", value: "cantelope" },

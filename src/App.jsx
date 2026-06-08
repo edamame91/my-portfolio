@@ -108,6 +108,8 @@ export default function App() {
         name={profile.name}
         selectedTheme={theme}
         onThemeChange={setTheme}
+        colorMode={colorMode}
+        onToggleColorMode={handleToggleColorMode}
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -118,7 +120,7 @@ export default function App() {
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <Footer colorMode={colorMode} onToggleColorMode={handleToggleColorMode} />
+      <Footer />
     </>
   );
 }

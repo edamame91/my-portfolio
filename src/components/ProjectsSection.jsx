@@ -45,9 +45,11 @@ function ProjectMedia({ item, projectTitle, priority = false }) {
 }
 
 function ProjectCard({ project, priority = false }) {
-  const [preview] = project.media || [];
+  const media = project.media || [];
+  // prefer the first image as the card header (fall back to first media)
+  const preview = media.find((item) => item.kind === "image") || media[0];
   const isTallCard = project.cardType === "tall";
-  const cardClassName = `card project-card${isTallCard ? " project-card--tall" : ""}`;
+  const cardClassName = `card project-card${isTallCard ? " project-card--tall" : ""}${project.featured ? " project-card--featured" : ""}`;
   const mediaFrameClassName = `project-card-media-frame${isTallCard ? " project-card-media-frame--tall" : ""}`;
 
   return (
@@ -86,6 +88,7 @@ export default function ProjectsSection({ projects }) {
     <Section
       id="projects"
       title="Projects"
+      titleTo="/projects"
       subtitle="Take a look at some of my work"
     >
       <div className="grid grid--projects">

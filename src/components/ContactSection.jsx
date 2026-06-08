@@ -48,7 +48,6 @@ const LinkedInIcon = () => (
 export default function ContactSection({ email, links }) {
   return (
     <Section id="contact" title="Get In Touch">
-      <div className="contact-card card">
         <div className="contact-actions" aria-label="Contact options">
           <a className="btn btn--ghost contact-action" href={`mailto:${email}`}>
             <MailIcon />
@@ -75,7 +74,6 @@ export default function ContactSection({ email, links }) {
             <span>LinkedIn</span>
           </a>
         </div>
-      </div>
     </Section>
   );
 }

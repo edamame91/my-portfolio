@@ -8,8 +8,6 @@ export default function AboutPage() {
         aria-labelledby="about-page-heading"
       >
         <article className="card about-page-card">
-          <h2 id="about-page-heading">About Me</h2>
-
           <div className="about-page-prose">
             <h3>Who I Am</h3>
             <p>
@@ -46,11 +44,6 @@ export default function AboutPage() {
               is technically possible and what actually gets shipped is still
               too wide. Gaming accessibility in particular has seen some
               exciting progress recently and it is something I follow closely.
-            </p>
-            <p>
-              I’m also interested in where AI tools actually improve workflows,
-              especially around UX and development, rather than just being added
-              for the sake of it.
             </p>
             <p>
               More broadly, I enjoy working across different layers of software.

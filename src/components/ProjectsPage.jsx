@@ -477,7 +477,7 @@ function FullProjectEntry({ project, isActive, isFirst }) {
           {project.blurb}
         </p>
         <p className="project-summary-line">
-          <span className="project-detail-label">Impact:</span> {project.impact}
+          <span className="project-detail-label">Impact:</span> {project.impact ? project.impact : null}
         </p>
 
         {project.details?.length ? (
@@ -496,9 +496,7 @@ function FullProjectEntry({ project, isActive, isFirst }) {
             <li key={item}>{item}</li>
           ))}
         </ul>
-      </div>
-
-      <div className="project-card-actions">
+        <div className="project-card-actions">
         {project.repoUrl ? (
           <a href={project.repoUrl} target="_blank" rel="noreferrer">
             Repository
@@ -510,6 +508,8 @@ function FullProjectEntry({ project, isActive, isFirst }) {
           </a>
         ) : null}
       </div>
+      </div>
+
     </article>
   );
 }

@@ -1,7 +1,4 @@
-export default function Footer({ colorMode, onToggleColorMode }) {
-  const nextThemeLabel = colorMode === "dark" ? "Light" : "Dark";
-
-  function handleBackToTop() {
+export function handleBackToTop() {
     const mainContent = document.getElementById("main-content");
 
     if (mainContent) {
@@ -10,21 +7,13 @@ export default function Footer({ colorMode, onToggleColorMode }) {
     }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+}
 
+export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-main">
         <div className="footer-actions">
-          <button
-            type="button"
-            className="btn btn--ghost footer-theme-toggle"
-            onClick={onToggleColorMode}
-            aria-label={`Switch to ${nextThemeLabel.toLowerCase()} theme`}
-          >
-            {nextThemeLabel} theme
-          </button>
-
           <button
             type="button"
             className="footer-link-button"

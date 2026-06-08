@@ -1,33 +1,180 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { THEME_MENU_OPTIONS } from "../data/themes";
+import { handleBackToTop } from "./Footer";
+
+// pull the ?section=x target out of a nav link
+function getSectionId(to) {
+  const query = to.split("?")[1];
+  return query ? new URLSearchParams(query).get("section") : null;
+}
 
 const navItems = [
-  { label: "About", to: "/?section=about" },
+  { label: "About", to: "/" },
   { label: "Projects", to: "/?section=projects" },
   { label: "Skills", to: "/?section=skills" },
   { label: "Contact", to: "/?section=contact" },
 ];
 
-export default function Header({ name, selectedTheme, onThemeChange }) {
+const SunIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    width="20"
+    height="20"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="12" cy="12" r="4.2" fill="currentColor" />
+    <g
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      fill="none"
+    >
+      <line x1="12" y1="2.5" x2="12" y2="5" />
+      <line x1="12" y1="19" x2="12" y2="21.5" />
+      <line x1="2.5" y1="12" x2="5" y2="12" />
+      <line x1="19" y1="12" x2="21.5" y2="12" />
+      <line x1="5.1" y1="5.1" x2="6.8" y2="6.8" />
+      <line x1="17.2" y1="17.2" x2="18.9" y2="18.9" />
+      <line x1="5.1" y1="18.9" x2="6.8" y2="17.2" />
+      <line x1="17.2" y1="6.8" x2="18.9" y2="5.1" />
+    </g>
+  </svg>
+);
+
+const MoonIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    width="20"
+    height="20"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      fill="currentColor"
+      d="M20 14.5A8 8 0 0 1 9.5 4a.8.8 0 0 0-1.1-.9A9 9 0 1 0 20.9 15.6a.8.8 0 0 0-.9-1.1Z"
+    />
+  </svg>
+);
+
+export default function Header({
+  name,
+  selectedTheme,
+  onThemeChange,
+  colorMode,
+  onToggleColorMode,
+}) {
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const desktopThemeMenuRef = useRef(null);
   const mobileThemeMenuRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   function closeMobileMenu() {
     setIsThemeMenuOpen(false);
     setIsMobileMenuOpen(false);
   }
 
+  function handleAboutNavClick(event, onNavigate) {
+    event.preventDefault();
+    onNavigate?.();
+    navigate("/");
+    window.requestAnimationFrame(() => handleBackToTop());
+  }
+
   const renderNavLinks = (onNavigate) =>
-    navItems.map((item) => (
-      <li key={item.to}>
-        <Link to={item.to} onClick={onNavigate}>
-          {item.label}
-        </Link>
-      </li>
-    ));
+    navItems.map((item) => {
+      const sectionId = getSectionId(item.to);
+      const isAbout = item.to === "/";
+      const isActive = isAbout
+        ? location.pathname === "/" && !activeSection
+        : sectionId === activeSection;
+
+      return (
+        <li key={item.to}>
+          <Link
+            to={item.to}
+            onClick={(event) => {
+              if (isAbout) {
+                handleAboutNavClick(event, onNavigate);
+                return;
+              }
+
+              onNavigate?.();
+            }}
+            className={isActive ? "active" : undefined}
+            aria-current={isActive ? "true" : undefined}
+          >
+            {item.label}
+          </Link>
+        </li>
+      );
+    });
+
+  // subtle backdrop blur once the page is scrolled
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 8);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // highlight the nav link for whichever section is in view (home only)
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection("");
+      return undefined;
+    }
+
+    const sectionIds = navItems
+      .map((item) => getSectionId(item.to))
+      .filter(Boolean);
+
+    function getSectionTop(element) {
+      return element.getBoundingClientRect().top + window.scrollY;
+    }
+
+    function updateActiveSection() {
+      const marker = window.scrollY + window.innerHeight * 0.35;
+      let current = "";
+
+      for (const id of sectionIds) {
+        const section = document.getElementById(id);
+
+        if (section && getSectionTop(section) <= marker) {
+          current = id;
+        }
+      }
+
+      const nearBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 80;
+
+      if (nearBottom && document.getElementById("contact")) {
+        current = "contact";
+      }
+
+      setActiveSection(current);
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+      setActiveSection("");
+    };
+  }, [location.pathname]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -106,7 +253,7 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
 
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header${isScrolled ? " is-scrolled" : ""}`}>
         <Link to="/" className="brand" aria-label="Go to homepage">
           {name}
         </Link>
@@ -123,6 +270,19 @@ export default function Header({ name, selectedTheme, onThemeChange }) {
             desktopThemeMenuRef,
             "theme-select-wrap--desktop",
           )}
+
+          <button
+            type="button"
+            className="color-mode-toggle"
+            onClick={onToggleColorMode}
+            aria-label={
+              colorMode === "dark"
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+            }
+          >
+            {colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
+          </button>
 
           <button
             type="button"

@@ -89,7 +89,8 @@ export const projects = [
   {
     id: "charity-donation-app",
     title: "Charity Donation Web App",
-    blurb: "A full-stack donation platform with role-based access control. Features tailored dashboards for donors, admins and charity staff, with inventory management and analytics.",
+    blurb:
+      "A full-stack donation platform with role-based access control. Features tailored dashboards for donors, admins and charity staff, with inventory management and analytics.",
     impact:
       "Demonstrated end-to-end product delivery from React UI to API and relational data layer.",
     tech: ["React", "Node.js", "SQLite", "REST APIs"],
@@ -158,46 +159,64 @@ export const projects = [
     media: [
       {
         kind: "image",
-        src: import.meta.env.BASE_URL + "projects/ux-auditor/pendo.webp",
+        src: import.meta.env.BASE_URL + "projects/ux-auditor/ux-auditor-1.webp",
         alt: "UX Auditor main dashboard showing audit input and results",
       },
       {
         kind: "image",
-        src: import.meta.env.BASE_URL + "projects/ux-auditor/pendo-nav.webp",
+        src: import.meta.env.BASE_URL + "projects/ux-auditor/ux-auditor-2.webp",
         alt: "Audit findings for navigation and wayfinding",
-      },
-      {
-        kind: "image",
-        src: import.meta.env.BASE_URL + "projects/ux-auditor/pendo-design.webp",
-        alt: "Audit findings panel for design system and component consistency",
       },
     ],
     showOnHome: true,
     showOnProjectsPage: true,
   },
   {
-    id: "2-5d-unity-game",
+    id: "echo-chamber",
     title: "Echo Chamber",
-    blurb: "A gameplay prototype built in Unity with C#.",
-    impact:
-      "Applied systems thinking to gameplay loops, state handling, and responsive interactions.",
-    tech: ["Unity", "C#", "Game Development"],
-    repoUrl: "https://github.com/edamame91",
+    blurb:
+      "A Unity puzzle platformer built around recording and replaying player movement.",
+    impact: null,
+    tech: [
+      "Unity",
+      "C#",
+      "2.5D",
+      "Object-Oriented Programming",
+      "Game Development",
+    ],
     liveUrl: null,
     details: [
-      "Designed a gameplay prototype with reusable interaction systems and manageable scene-level state transitions.",
-      "Balanced mechanics and moment-to-moment responsiveness to improve core-loop pacing and player feel.",
+      "Built a recording system that captures player input and replays it as a ghost character on a timed loop.",
+      "Designed puzzles where past selves press switches, block hazards, and open paths for your current run.",
     ],
     media: [
       {
         kind: "image",
-        src: import.meta.env.BASE_URL + "placeholder.webp",
-
-        alt: "2.5D Unity game scene preview",
+        src:
+          import.meta.env.BASE_URL +
+          "projects/echo-chamber/echo-chamber-1.webp",
+        alt: "Echo Chamber level with recorded player echoes",
+      },
+      {
+        kind: "image",
+        src:
+          import.meta.env.BASE_URL +
+          "projects/echo-chamber/echo-chamber-2.webp",
+        alt: "Echo Chamber puzzle platforming scene",
+      },
+      {
+        kind: "image",
+        src: import.meta.env.BASE_URL + "projects/echo-chamber/level-04.webp",
+        alt: "Echo Chamber puzzle platforming scene",
+      },
+      {
+        kind: "video",
+        src: import.meta.env.BASE_URL + "projects/echo-chamber/level-02.mp4",
+        type: "video/mp4",
+        alt: "Echo Chamber demo",
       },
     ],
-    showOnHome: false,
-    showOnProjectsPage: false,
-    featured: false,
+    showOnHome: true,
+    showOnProjectsPage: true,
   },
 ];
