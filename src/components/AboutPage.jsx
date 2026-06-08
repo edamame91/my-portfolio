@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 export default function AboutPage() {
   return (
     <main id="main-content" className="site-main site-main--about">
-      <section
-        className="about-page-section"
-        aria-labelledby="about-page-heading"
-      >
+      <section className="about-page-section" aria-label="About me">
         <article className="card about-page-card">
           <div className="about-page-prose">
             <h3>Who I Am</h3>

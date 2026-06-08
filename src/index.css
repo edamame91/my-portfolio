@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import "tailwindcss";
 
 /* expose tokens as tailwind colour + font classes (kept in sync at runtime) */
@@ -24,18 +23,6 @@
 /* #region Root theme tokens and global variables */
 :root {
   /* #region Theme palette tokens */
-  --carmine-50: #fce9eb;
-  --carmine-100: #f9d2d7;
-  --carmine-200: #f3a5b0;
-  --carmine-300: #ed7888;
-  --carmine-400: #e74b60;
-  --carmine-500: #e01f38;
-  --carmine-600: #b4182d;
-  --carmine-700: #871222;
-  --carmine-800: #5a0c17;
-  --carmine-900: #2d060b;
-  --carmine-950: #1f0408;
-
   --raspberry-50: #faeaeb;
   --raspberry-100: #f6d5d8;
   --raspberry-200: #ecacb0;
@@ -59,18 +46,6 @@
   --pistachio-800: #496006;
   --pistachio-900: #253003;
   --pistachio-950: #1a2202;
-
-  --blue-spruce-50: #ecf8f6;
-  --blue-spruce-100: #d9f2ee;
-  --blue-spruce-200: #b4e4dc;
-  --blue-spruce-300: #8ed7cb;
-  --blue-spruce-400: #68caba;
-  --blue-spruce-500: #42bda8;
-  --blue-spruce-600: #359787;
-  --blue-spruce-700: #287165;
-  --blue-spruce-800: #1b4b43;
-  --blue-spruce-900: #0d2622;
-  --blue-spruce-950: #091a18;
 
   --peppermint-50: #e9fcf8;
   --peppermint-100: #d3f8f2;
@@ -131,18 +106,6 @@
   --foam-banana-800: #655601;
   --foam-banana-900: #332b00;
   --foam-banana-950: #241e00;
-
-  --forest-moss-50: #f3faea;
-  --forest-moss-100: #e6f6d5;
-  --forest-moss-200: #cdedab;
-  --forest-moss-300: #b4e382;
-  --forest-moss-400: #9bda58;
-  --forest-moss-500: #82d12e;
-  --forest-moss-600: #68a725;
-  --forest-moss-700: #4e7d1c;
-  --forest-moss-800: #345412;
-  --forest-moss-900: #1a2a09;
-  --forest-moss-950: #121d06;
   /* #endregion Theme palette tokens */
 
   /* #region Active theme alias */
@@ -491,13 +454,6 @@ h2 {
   }
 }
 
-h4 {
-  font-family: Oxygen;
-  font-weight: 400;
-  color: var(--text-h);
-  font-size: clamp(1rem, 2vw, 1rem);
-}
-
 a {
   text-decoration: none;
 }
@@ -507,9 +463,6 @@ code {
   display: inline-flex;
   border-radius: 4px;
   color: var(--text-h);
-}
-
-code {
   font-size: 15px;
   line-height: 135%;
   padding: 4px 8px;

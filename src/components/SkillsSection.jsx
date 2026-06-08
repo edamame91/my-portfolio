@@ -2,11 +2,7 @@ import Section from "./Section";
 
 export default function SkillsSection({ groups }) {
   return (
-    <Section
-      id="skills"
-      title="Skills"
-      subtitle=""
-    >
+    <Section id="skills" title="Skills">
       <div className="grid grid--skills">
         {groups.map((group) => (
           <article key={group.category} className="card skill-card">

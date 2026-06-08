@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { THEME_MENU_OPTIONS } from "../data/themes";
-import { handleBackToTop } from "./Footer";
+import { handleBackToTop } from "../lib/scroll";
 
 // pull the ?section=x target out of a nav link
 function getSectionId(to) {

@@ -1,6 +1,5 @@
 export default function AboutSection({ profile }) {
   const frameworkLogos = profile.frameworkLogos ?? [];
-  const badges = [profile.role, profile.location].filter(Boolean);
 
   return (
       <div className="about-content">

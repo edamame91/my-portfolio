@@ -1,13 +1,4 @@
-export function handleBackToTop() {
-    const mainContent = document.getElementById("main-content");
-
-    if (mainContent) {
-      mainContent.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
+import { handleBackToTop } from "../lib/scroll";
 
 export default function Footer() {
   return (

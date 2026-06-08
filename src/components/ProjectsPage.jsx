@@ -1,6 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
+// chevron icon for carousel/lightbox nav
+function Chevron({ direction = "left" }) {
+  return (
+    <svg
+      className="chevron-icon"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <polyline
+        points={direction === "left" ? "15 5 8 12 15 19" : "9 5 16 12 9 19"}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function ProjectMedia({ item, projectTitle, priority = false, sizes }) {
   const isPlaceholder = /placeholder|hero\.png/i.test(item.src || "");
   const srcSet = item.srcSet
@@ -281,31 +304,34 @@ function FullProjectEntry({ project, isActive, isFirst }) {
                 />
               </button>
             )}
+
+            {hasMultipleMedia ? (
+              <>
+                <button
+                  type="button"
+                  className="project-carousel-nav project-carousel-nav--prev"
+                  onClick={showPrevious}
+                  aria-label={`Show previous media for ${project.title}`}
+                >
+                  <Chevron direction="left" />
+                </button>
+                <button
+                  type="button"
+                  className="project-carousel-nav project-carousel-nav--next"
+                  onClick={showNext}
+                  aria-label={`Show next media for ${project.title}`}
+                >
+                  <Chevron direction="right" />
+                </button>
+              </>
+            ) : null}
           </div>
 
           {hasMultipleMedia ? (
             <div className="project-carousel-footer">
-              <div className="project-carousel-controls">
-                <button
-                  type="button"
-                  className="project-carousel-button"
-                  onClick={showPrevious}
-                  aria-label={`Show previous media for ${project.title}`}
-                >
-                  ←
-                </button>
-                <span className="project-carousel-count" aria-live="polite">
-                  {currentIndex + 1} / {media.length}
-                </span>
-                <button
-                  type="button"
-                  className="project-carousel-button"
-                  onClick={showNext}
-                  aria-label={`Show next media for ${project.title}`}
-                >
-                  →
-                </button>
-              </div>
+              <span className="project-carousel-count" aria-live="polite">
+                {currentIndex + 1} / {media.length}
+              </span>
 
               <div className="project-carousel-dots" role="tablist">
                 {media.map((item, index) => {
@@ -423,48 +449,51 @@ function FullProjectEntry({ project, isActive, isFirst }) {
                   decoding="async"
                 />
               )}
+
+              {hasMultipleMedia ? (
+                <>
+                  <button
+                    type="button"
+                    className="project-carousel-nav project-carousel-nav--prev"
+                    onClick={showPreviousInLightbox}
+                    aria-label={`Show previous fullscreen media for ${project.title}`}
+                  >
+                    <Chevron direction="left" />
+                  </button>
+                  <button
+                    type="button"
+                    className="project-carousel-nav project-carousel-nav--next"
+                    onClick={showNextInLightbox}
+                    aria-label={`Show next fullscreen media for ${project.title}`}
+                  >
+                    <Chevron direction="right" />
+                  </button>
+                </>
+              ) : null}
             </div>
 
             {hasMultipleMedia ? (
-              <div className="project-carousel-controls">
-                <button
-                  type="button"
-                  className="project-carousel-button"
-                  onClick={showPreviousInLightbox}
-                  aria-label={`Show previous fullscreen media for ${project.title}`}
-                >
-                  ←
-                </button>
-                <div className="project-carousel-dots" role="tablist">
-                  {media.map((item, index) => {
-                    const label =
-                      item.alt || `${project.title} media ${index + 1}`;
-                    const isSelected = index === lightboxIndex;
+              <div className="project-carousel-dots" role="tablist">
+                {media.map((item, index) => {
+                  const label =
+                    item.alt || `${project.title} media ${index + 1}`;
+                  const isSelected = index === lightboxIndex;
 
-                    return (
-                      <button
-                        type="button"
-                        key={`${project.id}-lightbox-${item.src}-${index}`}
-                        className={`project-carousel-dot${isSelected ? " is-active" : ""}`}
-                        onClick={() => {
-                          setLightboxIndex(index);
-                          setZoomPercent(100);
-                        }}
-                        aria-label={`Show ${label} in fullscreen`}
-                        aria-selected={isSelected}
-                        role="tab"
-                      />
-                    );
-                  })}
-                </div>
-                <button
-                  type="button"
-                  className="project-carousel-button"
-                  onClick={showNextInLightbox}
-                  aria-label={`Show next fullscreen media for ${project.title}`}
-                >
-                  →
-                </button>
+                  return (
+                    <button
+                      type="button"
+                      key={`${project.id}-lightbox-${item.src}-${index}`}
+                      className={`project-carousel-dot${isSelected ? " is-active" : ""}`}
+                      onClick={() => {
+                        setLightboxIndex(index);
+                        setZoomPercent(100);
+                      }}
+                      aria-label={`Show ${label} in fullscreen`}
+                      aria-selected={isSelected}
+                      role="tab"
+                    />
+                  );
+                })}
               </div>
             ) : null}
           </div>
@@ -476,9 +505,12 @@ function FullProjectEntry({ project, isActive, isFirst }) {
           <span className="project-detail-label">Overview:</span>{" "}
           {project.blurb}
         </p>
-        <p className="project-summary-line">
-          <span className="project-detail-label">Impact:</span> {project.impact ? project.impact : null}
-        </p>
+        {project.impact ? (
+          <p className="project-summary-line">
+            <span className="project-detail-label">Impact:</span>{" "}
+            {project.impact}
+          </p>
+        ) : null}
 
         {project.details?.length ? (
           <ul

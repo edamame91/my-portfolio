@@ -5,9 +5,7 @@ export default function Section({ id, title, subtitle, titleTo, children }) {
 
   return (
     <section id={id} className="section" aria-labelledby={headingId}>
-      <div
-        className={`section-header${titleTo ? " section-header--linked" : ""}`}
-      >
+      <div className="section-header">
         {titleTo ? (
           <Link
             className="section-title-link"
